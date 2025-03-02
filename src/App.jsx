@@ -8,11 +8,11 @@ import Home from "./Pages/Home";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/SignIn" element={<SignIn />} />
-      <Route path="/Users/:id" element={<UserAccount />} />
-      <Route path="/About" element={<SignIn />} />
-      <Route path="/test" element={<TestPage />} />
+      <Route path="/Fakebook/" element={<Home />} />
+      <Route path="/Fakebook/SignIn" element={<SignIn />} />
+      <Route path="/Fakebook/Users/:id" element={<UserAccount />} />
+      <Route path="/Fakebook/About" element={<SignIn />} />
+      <Route path="/Fakebook/test" element={<TestPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
