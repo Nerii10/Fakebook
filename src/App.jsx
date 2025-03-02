@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./Pages/NotFound";
 import SignIn from "./Pages/SignIn";
 import TestPage from "./Pages/Test/testpage";
@@ -7,14 +7,16 @@ import Home from "./Pages/Home";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/Fakebook/" element={<Home />} />
-      <Route path="/Fakebook/SignIn" element={<SignIn />} />
-      <Route path="/Fakebook/Users/:id" element={<UserAccount />} />
-      <Route path="/Fakebook/About" element={<SignIn />} />
-      <Route path="/Fakebook/test" element={<TestPage />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/Users/:id" element={<UserAccount />} />
+        <Route path="/About" element={<SignIn />} />
+        <Route path="/test" element={<TestPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
