@@ -44,8 +44,10 @@ export default function Home() {
     
 
     async function handlePostAddition() {
-        if (!Localpost || !Localpost.content.trim()) return; // Zabezpieczenie, by nie wysłać pustego posta
-
+        if(!Localuser) {
+            console.log("login first") 
+            return;
+        }        
         try {
             const response = await fetch('https://fakebookbakcend.onrender.com/api/post', {
                 method: "POST",
