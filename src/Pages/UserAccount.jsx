@@ -60,6 +60,31 @@ export default function UserAccount() {
 
     }
 
+    async function handleAcceptFriend({senderId}){
+        try {
+                const response = await fetch(`${apiLink}/api/friends/accept/${User._id}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({Localuser, senderId}), 
+                });
+            
+                    const data = await response.json();
+    
+                   setTimeout((window.location.reload()),100)
+                    
+                if (response.ok) {
+                    console.log(data)
+                } else {
+                        console.log(data.message); 
+                }
+            
+            } catch (error) {
+                    console.error("Wystąpił błąd:", error);
+            }
+    }
+
     return(
         <> 
         
@@ -67,11 +92,41 @@ export default function UserAccount() {
         <div className='WebsiteContent'>
 
                 {Localuser && id && id === Localuser._id ? 
-                <MyProfile User={User}></MyProfile>
+                <MyProfile User={User} LocalUser={Localuser}></MyProfile>
                 :
-                <OtherProfile User={User}></OtherProfile>
+                <OtherProfile User={User} Localuser={Localuser}></OtherProfile>
             }
                 <br></br>
+                {Localuser && id && id === Localuser._id? 
+                <>
+                <h2>FriendRequests</h2>
+                <div>{Localuser.friendRequests && Localuser.friendRequests.map((request,index)=>{
+                    return(
+                        <>  
+                        <div>
+                            {request} 
+                            <button onClick={()=>{handleAcceptFriend({senderId: request})}}>accept</button>
+                        </div>
+                        </>
+                    )
+                })} </div>
+                
+               
+                </>
+                : ""}
+                <br></br>
+
+                <h2>Friends</h2>
+                <div>{User && User.friends && User.friends.map((friend,index)=>{
+                    return(
+                        <>  
+                        <div>
+                            {friend} 
+                        </div>
+                        </>
+                    )
+                })} </div>
+                <br></br><br></br>
                 <div style={{height:"300px", backgroundColor:"rgba(44, 44, 44, 0.301)",border: "1px rgba(255, 255, 255, 0.534) solid", borderRadius:'15px', display:'flex',justifyContent:"center"}}>
                     <div style={{padding:"20px",width:"100%"}}>
                         {User ? (
@@ -119,24 +174,56 @@ export default function UserAccount() {
     )
 }
 
-export function MyProfile({User}) {
+export function MyProfile({User,LocalUser}) {
     return(
         <>  
-            <div style={{position:"relative",zIndex:-0, maxHeight:"400px",overflow:'hidden'}}>
-                <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
-                <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
-            </div>
+         <div style={{position:"relative",zIndex:-0, maxHeight:"400px",overflow:'hidden'}}>
+            <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
+            <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
+        </div>
         </>
     )
 }
 
-export function OtherProfile({User}) {
+export function OtherProfile({User,Localuser}) {
+
+    async function handleAddFriend(){
+        try {
+                const response = await fetch(`${apiLink}/api/friends/${User._id}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({user: User,Localuser}), 
+                });
+            
+                    const data = await response.json();
+    
+                    setTimeout((window.location.reload()),100)
+                    
+                if (response.ok) {
+                    console.log(data)
+                } else {
+                        console.log(data.message); 
+                }
+            
+            } catch (error) {
+                    console.error("Wystąpił błąd:", error);
+            }
+    }
+
+
     return(
         <>  
-        <div style={{position:"relative",zIndex:-0, maxHeight:"400px",overflow:'hidden'}}>
-            <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
-            <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
-        </div>
+            <div style={{width:"100%",position:"relative",zIndex:-0, maxHeight:"400px"}}>
+                <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
+                <div style={{display:'flex',justifyContent:'center',alignItems:"center",width:"100%", position:"relative"}}>
+                    <div style={{width:"100%", textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0, backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)", borderRadius:'0px',border:"rgba(255, 255, 255, 0.6) 1px solid", display:"flex", justifyContent:'space-between', alignItems:"center",borderRadius:"15px"}}>
+                        <h1 style={{margin:0}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
+                        <button onClick={()=>{handleAddFriend()}}>Add friend</button>
+                    </div >
+                </div>
+            </div>
         </>
     )
 }
