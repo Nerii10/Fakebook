@@ -30,18 +30,23 @@ export default function UserAccount() {
                 :
                 <OtherProfile User={User}></OtherProfile>
             }
-
+                <br></br>
                 <div style={{height:"300px", backgroundColor:"rgba(44, 44, 44, 0.301)",border: "1px rgba(255, 255, 255, 0.534) solid", borderRadius:'15px'}}>
                     <ul>
                         <li>
-                            {User? User._id : "-"}
+                            {User? "_id : " + User._id : " "}
                         </li>
                         <li>
-                            {User? User.age : "-"}
+                            {User ? (User.age !== "" ? User.age : "no age") : " "}
                         </li><li>
-                            {User? User.email : "-"}
+                            {User ? (User.email !== "" ? User.email : "no email") : " "}
+                        </li>
+                        <li>
+                            {Localuser && id && id === Localuser._id ? "Your account" : "Not your account"}
                         </li>
                     </ul>
+
+
                 </div>
 
 
