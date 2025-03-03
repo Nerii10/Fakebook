@@ -47,7 +47,7 @@ export default function Home() {
         if (!Localpost || !Localpost.content.trim()) return; // Zabezpieczenie, by nie wysłać pustego posta
 
         try {
-            const response = await fetch('http://localhost:8000/api/post', {
+            const response = await fetch('https://fakebookbakcend.onrender.com/api/post', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -81,9 +81,9 @@ export function MyProfile({User}) {
         <>  
 
             <div style={{position:"relative",zIndex:-0, maxHeight:"400px",overflow:'hidden'}}>
-            <img src='/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
-            <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
-        </div>
+                <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
+                <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
+            </div>
         </>
     )
 }
@@ -92,8 +92,8 @@ export function OtherProfile({User}) {
     return(
         <>  
         <div style={{position:"relative",zIndex:-0, maxHeight:"400px",overflow:'hidden'}}>
-            <img src='/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
-            <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"black"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
+            <img src='/Fakebook/test.jpg' style={{width:"100%",margin:0,zIndex:0}}></img>
+            <h1 style={{textTransform:"capitalize",position:"absolute",zIndex:0,bottom:0,left:"20px", backgroundColor:"rgba(44, 44, 44, 0.51)", backdropFilter:"blur(5px)",padding:"5px", borderRadius:'5px',border:"rgba(255, 255, 255, 0.6) 1px solid"}}>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
         </div>
         </>
     )
