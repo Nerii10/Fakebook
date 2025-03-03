@@ -8,7 +8,8 @@ export default function NotFound() {
     const [name, setName] = useState(""); 
     const [message, setMessage] = useState("");  
     const [token, setToken] = useState(""); 
-    const apiLink = 'https://fakebookbakcend.onrender.com'
+    const apiLink = 'http://localhost:8000'
+    //https://fakebookbakcend.onrender.com
 
      const handleRegister = async () => {
         try {

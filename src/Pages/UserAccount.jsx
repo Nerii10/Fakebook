@@ -3,6 +3,7 @@ import { handleLocalUserDataDownload ,handlePostDownload,handleUserDataDownload 
 import { useState,useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import { Link } from 'react-router-dom';
+import Post from '../Components/Post';
 
 export default function UserAccount() {
 
@@ -53,21 +54,11 @@ export default function UserAccount() {
                 <h1 style={{textTransform:"capitalize"}}></h1>
                 <div className="Feed">
                     
-                    {Localuser && Posts && Posts.map((post,index)=>{
+                    {Localuser && Posts && Posts.toReversed().map((post,index)=>{
                         if(post.userid === id){
                         return(
                             <>
-                                <div className="Post">
-                                    <div style={{width:"90%",height:"90%",display:"flex",flexDirection:"column",gap:"10px"}}>
-                                        <div className="PostData">
-                                            <Link to={`/users/${post.userid}`}>{post.username}</Link>
-                                            21:50
-                                        </div>
-                                        <div className="PostContent">
-                                            <span>{post.content}</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <Post index={index} post={post} LocalUser={Localuser}></Post>
                             </>
                         )}
                     })} 

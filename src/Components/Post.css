@@ -1,0 +1,83 @@
+.Post{
+    width: 100%;
+    background-color: rgba(75, 75, 75, 0.301);
+    border-radius: 15px;
+    border: 1px rgba(255, 255, 255, 0.534) solid;
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+.InnerPost{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.PostData{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.PostManipulation{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    position: relative;
+}
+
+.PostManipulation button{
+    padding: 0px 9px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: rgba(61, 61, 61, 0.774);
+    backdrop-filter: blur(2px);
+    border: rgba(255, 255, 255, 0.527) 1px solid;
+}
+
+.PostSettings{
+    position: absolute;
+    height:0;
+    top: 30px;
+    opacity:0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px 20px;
+    overflow: hidden;
+    background-color: rgba(61, 61, 61, 0.774);
+    backdrop-filter: blur(2px);
+    border: rgba(255, 255, 255, 0.527) 0px solid
+}
+
+.PostDate{
+    color:rgb(109, 109, 109)
+}
+
+.PostRating{
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    align-items: center;
+}
+
+.PostRatingThumb{
+    --colorNoInteraction: transparent;
+    --colorInteraction: rgb(4, 113, 214);
+    border-radius: 20px;
+    border: 1px white solid;
+    padding: 4px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 100%;
+}

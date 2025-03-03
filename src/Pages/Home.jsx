@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import { handleLocalUserDataDownload, handlePostDownload } from "../apiRequests";
 import './Styles/Home.css';
 import Navbar from "../Components/Navbar";
+import Post from "../Components/Post";
+import { motion } from "framer-motion";
+import { Scale } from "lucide-react";
 
 export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
     const [Posts, setPosts] = useState([]);
+    const apiLink = 'http://localhost:8000'
+    //https://fakebookbakcend.onrender.com
 
     useEffect(() => {
         handleLocalUserDataDownload({ setLocaluser });
@@ -49,7 +54,7 @@ export default function Home() {
             return;
         }        
         try {
-            const response = await fetch('https://fakebookbakcend.onrender.com/api/post', {
+            const response = await fetch(`${apiLink}/api/post`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -61,14 +66,8 @@ export default function Home() {
                 const errorData = await response.json();
                 throw new Error(`Error ${response.status}: ${errorData.message || "Unknown error"}`);
             }
-
-            // Dodaj nowy post do istniejących
-            const newPost = await response.json();
-            setPosts(prevPosts => [...prevPosts,newPost.post ]); // Dodaj nowy post na początek
-
-            // Opcjonalnie, wyczyść formularz
-            setLocalpost({ ...Localpost, content: "" });
-
+            
+            setTimeout((window.location.reload()),100)
         } catch (err) {
             console.log(err);
         }
@@ -81,14 +80,17 @@ export default function Home() {
                 <h1>Catch up on the latest!</h1>
 
                 <div className="FeedInput">
-                    <input
+                    <motion.input
+                        whileFocus={{scale:0.9}}
                         className="FeedInputText"
                         type="text"
                         placeholder="What's on your mind?"
                         value={Localpost ? Localpost.content : ""}
                         onChange={handleLocalpostContent}
                     />
-                    <input
+                    <motion.input
+                        whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}}
                         className="FeedInputButton"
                         type="button"
                         value={"Post"}
@@ -101,17 +103,7 @@ export default function Home() {
                 <div className="Feed">
                     {Posts.length > 0 ? (
                         Posts.toReversed().map((post, index) => (
-                            <div className="Post" key={index}>
-                                <div style={{ width: "90%", height: "90%", display: "flex", flexDirection: "column", gap: "10px" }}>
-                                    <div className="PostData">
-                                        <Link to={`/users/${post.userid}`}>{post.username}</Link>
-                                        <span>{post.date}</span>
-                                    </div>
-                                    <div className="PostContent">
-                                        <span>{post.content}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <Post key={index} index={index} post={post} LocalUser={Localuser}></Post>
                         ))
                     ) : (
                         "Loading..."

@@ -26,25 +26,8 @@ body,html{
   width:90%;
   height: 100%;
   word-wrap: break-word;
+  max-width: 1000px;
 }
-
-.Post{
-  width: 100%;
-  background-color: rgba(44, 44, 44, 0.301);
-  border-radius: 15px;
-  border: 1px rgba(255, 255, 255, 0.534) solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0px;
-}
-
-.PostData{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 
 .Feed{
   display: flex;
@@ -54,12 +37,14 @@ body,html{
   gap: 20px;
 }
 
-.FeedInput{
+.FeedInput {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+  gap: 10px; 
+  box-sizing: border-box; }
+
 
 .FeedInputText{
   color:rgb(0, 0, 0);
@@ -69,6 +54,8 @@ body,html{
   padding: 10px 20px;
   font-size: 16px;
   height: auto;
+  width: 100%;
+  max-width: 300px;
 }
 
 .FeedInputButton{
@@ -76,7 +63,9 @@ body,html{
   color:white;
   font-size: 15px;
   margin: 0;
-  padding: 10px 50px;
+  padding: 10px 10px;
   background-color: rgb(103, 8, 255);
   border-radius: 20px;
+  width: 40%;
+  max-width: 150px;
 }
