@@ -2,7 +2,8 @@ import { Link } from "react-router-dom"
 import './Navbar.css'
 import { useState,useEffect } from "react"
 import { handleLocalUserDataDownload, handleLogout } from "../apiRequests"
-
+import {motion} from 'framer-motion'
+import { Book, BookA} from "lucide-react"
 
 export default function Navbar(){
 
@@ -29,8 +30,10 @@ export default function Navbar(){
 
             <div className="NavbarContainer">
                 <div style={{width:"90%", display:'flex', flexDirection:"row", justifyContent:"space-between", alignItems:"center", position:"relative"}}>
-                    <Link to={"/"} style={{textDecoration:"none"}}><h1>Fakebook</h1></Link>
-
+                    <Link to={"/"} style={{textDecoration:"none", color:"white", display:"flex", justifyContent:'center', alignItems:"center", gap:"10px"}}>
+                        <h1>Fakebook</h1> 
+                        <BookA></BookA>
+                    </Link>
                     {Localuser ?
                     (
                     <>
@@ -38,14 +41,17 @@ export default function Navbar(){
                     className="NavbarButton"
                     >{Localuser ? Localuser.name : "SignIn"}</button>
 
-                    <div className={NavbarOpen ? "NavbarUser" : "NavbarUserClosed"}>
+                    <motion.div className={"NavbarUser"}
+                    animate={NavbarOpen ? {height: "270px",  padding: "0px 10px"} : {height: "0px", padding:"0px 10px", border: "rgba(255, 255, 255, 0) 0px solid"}}
+                    transition={{ease:"circInOut"}}
+                    >
                         <Link to={Localuser && `/users/${Localuser._id}`} style={{textDecoration:"none",textTransform:"capitalize", color:"white"}}>
                         <h3 className="NavbarUserAction">Account</h3>
                         </Link>
                         <h3 className="NavbarUserAction">Settings</h3>
                         <h3 className="NavbarUserAction">Help</h3>
                         <h3 className="NavbarUserAction" onClick={handleLogout}>Logout</h3>
-                    </div>
+                    </motion.div>
                     </>) : 
                     <>
                     <Link to={Localuser ?`/users/${Localuser._id}` : "/signIn"} style={{textDecoration:"none",textTransform:"capitalize"}}><h1>{Localuser ? Localuser.name : "SignIn"}</h1></Link>

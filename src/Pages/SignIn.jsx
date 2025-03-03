@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { handleLogout} from "../apiRequests";
 import Navbar from "../Components/Navbar";
+import { apiLink } from "../apiRequests";
+
 export default function NotFound() {
     
     const [login, setLogin] = useState("");  
@@ -8,8 +10,6 @@ export default function NotFound() {
     const [name, setName] = useState(""); 
     const [message, setMessage] = useState("");  
     const [token, setToken] = useState(""); 
-    const apiLink = 'https://fakebookbakcend.onrender.com'
-    //http://localhost:8000
 
      const handleRegister = async () => {
         try {

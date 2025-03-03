@@ -23,46 +23,27 @@
     position: absolute;
     top:66px;
     right: -1%;
-    height: 270px;
-    width: 100px;
-    padding: 0px 20px;
-    display: flex;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    align-items: center;
-    flex-direction: column;
-    background-color: #141414;
-    border: rgba(255, 255, 255, 0.644) 1px solid;
-    overflow: hidden;
-    transition: 0.5s ease;
-}
-
-.NavbarUserClosed{
-    position: absolute;
-    top:66px;
-    right: -1%;
     height: 0px;
-    width: 100px;
-    padding: 0px 0px;
+    width: 85px;
     display: flex;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     align-items: center;
     flex-direction: column;
-    background-color: #141414;
-    border: rgba(255, 255, 255, 0.644) 0px solid;
+    background-color: #0c0c0c;
+    border: rgba(255, 255, 255, 0.4) 1px solid;
     overflow: hidden;
-    transition: 0.5s ease;
 }
 
 .NavbarButton{
     background-color: transparent;
     border: 1px white solid;
     height: fit-content;
-    border-radius: 20px;
+    border-radius: 15px;
     font-size: 20px;
     padding: 5px 15px;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
 .NavbarUserAction{

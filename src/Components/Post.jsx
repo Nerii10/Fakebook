@@ -3,9 +3,7 @@ import { Link } from "react-router-dom"
 import './Post.css'
 import { Trash, ThumbsDown, ThumbsUp } from "lucide-react"
 import { motion } from 'framer-motion'
-
-const apiLink = 'https://fakebookbakcend.onrender.com'
-    //http://localhost:8000
+import { apiLink } from "../apiRequests"
 
 async function handlePostLike({ post, LocalUser, setPost }) {
     try {
@@ -29,6 +27,7 @@ async function handlePostLike({ post, LocalUser, setPost }) {
 }
 
 async function handlePostDisslike({ post, LocalUser, setPost }) {
+    
     try {
         const response = await fetch(`${apiLink}/api/post/disslike`, {
             method: "PATCH",
@@ -128,7 +127,7 @@ export default function Post({ index, post, LocalUser }) {
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
                         }}
-                        onClick={handleLike}  
+                        onClick={()=>{handleLike(), (isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) && handleDislike())}}  
                         disabled={!isUserLoggedIn} 
                     >
                         <ThumbsUp /> {updatedPost ? updatedPost.likes.length : ""}
@@ -139,7 +138,7 @@ export default function Post({ index, post, LocalUser }) {
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
                         }}
-                        onClick={handleDislike} 
+                        onClick={()=>{handleDislike(), (isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) && handleLike())}} 
                         disabled={!isUserLoggedIn} 
                     >
                         <ThumbsDown /> {updatedPost ? updatedPost.disslikes.length : ""}

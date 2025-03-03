@@ -6,13 +6,12 @@ import Navbar from "../Components/Navbar";
 import Post from "../Components/Post";
 import { motion } from "framer-motion";
 import { Scale } from "lucide-react";
+import { apiLink } from "../apiRequests";
 
 export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
     const [Posts, setPosts] = useState([]);
-    const apiLink = 'https://fakebookbakcend.onrender.com'
-    //http://localhost:8000
 
     useEffect(() => {
         handleLocalUserDataDownload({ setLocaluser });
