@@ -97,32 +97,38 @@ export default function NotFound() {
                     placeholder="login" 
                     value={login} 
                     onChange={handleLoginChange} 
+                    style={{fontSize:"16px"}}
                 />
                 <input 
                     type="password" 
                     placeholder="password" 
                     value={password} 
                     onChange={handlePasswordChange} 
+                    style={{fontSize:"16px"}}
                 />
                  <input 
                     type="text" 
                     placeholder="name" 
                     value={name} 
                     onChange={handleNameChange} 
+                    style={{fontSize:"16px"}}
                 />
                 <button 
                     onClick={handleRegister}  
+                    style={{fontSize:"16px"}}
                 >
                     Register
                 </button>
                 <button 
                     onClick={handleLogin}  
+                    style={{fontSize:"16px"}}
                 >
                     Login
                 </button>
 
                 <button 
                     onClick={()=>{handleLogout();handleLogoutBrowser();}}
+                    style={{fontSize:"16px"}}
                 >
                     LogOut
                 </button>
