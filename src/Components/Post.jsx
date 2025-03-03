@@ -128,8 +128,8 @@ export default function Post({ index, post, LocalUser }) {
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
                         }}
-                        onClick={handleLike}  // Funkcja obsługi like
-                        disabled={!isUserLoggedIn} // Zablokowanie kliknięcia, gdy nie ma lokalnego użytkownika
+                        onClick={handleLike}  
+                        disabled={!isUserLoggedIn} 
                     >
                         <ThumbsUp /> {updatedPost ? updatedPost.likes.length : ""}
                     </button>
@@ -139,8 +139,8 @@ export default function Post({ index, post, LocalUser }) {
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
                         }}
-                        onClick={handleDislike}  // Funkcja obsługi dislike
-                        disabled={!isUserLoggedIn} // Zablokowanie kliknięcia, gdy nie ma lokalnego użytkownika
+                        onClick={handleDislike} 
+                        disabled={!isUserLoggedIn} 
                     >
                         <ThumbsDown /> {updatedPost ? updatedPost.disslikes.length : ""}
                     </button>

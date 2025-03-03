@@ -59,12 +59,12 @@ body,html{
 }
 
 .FeedInputButton{
-  border: 2px rgb(159, 100, 255) solid;
+  border: 1px rgb(255, 255, 255) solid;
   color:white;
   font-size: 15px;
   margin: 0;
   padding: 10px 10px;
-  background-color: rgb(103, 8, 255);
+  background-color: rgb(76, 0, 255);
   border-radius: 20px;
   width: 40%;
   max-width: 150px;

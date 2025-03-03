@@ -70,14 +70,19 @@
 
 .PostRatingThumb{
     --colorNoInteraction: transparent;
-    --colorInteraction: rgb(4, 113, 214);
+    --colorInteraction: rgb(76, 0, 255);
     border-radius: 20px;
     border: 1px white solid;
     padding: 4px 20px;
     display: flex;
+    color: white;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 20px;
     font-size: 100%;
+}
+
+.PostRatingThumb:disabled{
+    color: rgb(99, 99, 99);
 }
