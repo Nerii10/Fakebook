@@ -4,8 +4,8 @@ import './Post.css'
 import { Trash, ThumbsDown, ThumbsUp } from "lucide-react"
 import { motion } from 'framer-motion'
 
-const apiLink = 'http://localhost:8000'
-// https://fakebookbakcend.onrender.com
+const apiLink = 'https://fakebookbakcend.onrender.com'
+    //http://localhost:8000
 
 async function handlePostLike({ post, LocalUser, setPost }) {
     try {

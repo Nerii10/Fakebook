@@ -11,8 +11,8 @@ export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
     const [Posts, setPosts] = useState([]);
-    const apiLink = 'http://localhost:8000'
-    //https://fakebookbakcend.onrender.com
+    const apiLink = 'https://fakebookbakcend.onrender.com'
+    //http://localhost:8000
 
     useEffect(() => {
         handleLocalUserDataDownload({ setLocaluser });
