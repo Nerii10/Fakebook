@@ -1,0 +1,188 @@
+.UserProfileHeader{
+    text-transform:capitalize;
+    position:absolute;
+    z-Index:0;
+    bottom:0; 
+    background-color:   rgba(44, 44, 44, 0.51);
+    backdrop-filter:blur(5px);
+    padding: 10px;
+    border:rgba(255, 255, 255, 0.6) 1px solid;
+    border-radius: 20px;
+    width:90%;
+    height:fit-content;
+    flex-direction: row;
+    display: flex;
+    justify-content:space-between;
+}
+
+.AddFriendButton{
+    border: 1px rgba(255, 255, 255, 0.656) solid;
+    color:white;
+    font-size: 18px;
+    margin: 0;
+    padding: 5px;
+    max-width: 200px;
+    width: 100%;
+    background-color: rgb(119, 0, 255);
+    border-radius: 15px;
+  }
+
+.UserName{
+    margin:0;
+    font-size:20px;
+}
+
+.UserImage{
+    --borderRadius: 25px;
+    width:100%;
+    margin:0;
+    z-index:0;
+    max-height:400px;
+    border-bottom-left-radius: var(--borderRadius);
+    border-bottom-right-radius: var(--borderRadius);
+    border: 1px rgba(255, 255, 255, 0.4) solid;
+}
+
+.UserData{
+    height:fit-content;
+    padding: 10px 10px;
+    background-color:rgba(44, 44, 44, 0.301);
+    border: 1px rgba(255, 255, 255, 0.534) solid;
+    border-radius:20px; 
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.UserDataInput{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding: 0px 10px;
+    min-height: 60px;
+    box-sizing: border-box;
+    gap:20px;
+    background-color: rgb(50, 50, 50);
+    border-radius: 20px;
+}
+
+.UserDataInput .DataIcon {
+    color: rgb(185, 124, 255);
+    background-color: rgb(38, 38, 38);
+    border-radius: 20%;
+    padding: 5px;
+}
+
+.UserDataInput input[type="text"] {
+    width: 100%;
+    overflow: auto;
+    border:none;
+}
+
+.UserDataInput textarea {
+    width: fit-content;
+    overflow: auto;
+    width: 100%;
+    border:1px rgba(255, 255, 255, 0.319) solid;
+    border-radius: 10px;
+}
+
+.UserDataInput input[type="date"] {
+    border:none;
+    width: 100%;
+}
+
+.Interests{
+    display: flex;
+    width: 75%;
+    gap: 30px;
+    overflow-x:auto;
+    scrollbar-width: none;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.UserDataInput label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.UserDataInput input[type="checkbox"] {
+    -webkit-appearance: none; 
+    appearance: none;
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    padding: 10px  25px ;
+    background-color: transparent;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+
+.UserDataInput input[type="checkbox"]:checked::after {
+    content: ''; 
+    position: absolute;
+    top: 2px;
+    left: 75%;
+    width: 10px;
+    height: 75%;
+    background-color: rgb(179, 0, 255); 
+    border-radius: 3px; 
+}
+
+.UserDataInput input[type="checkbox"]::after {
+    content: ''; 
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 10px;
+    height: 75%;
+    background-color: rgb(255, 255, 255); 
+    border-radius: 3px; 
+    transition: 0.3s ease;
+}
+
+.UserDataInput input[type="checkbox"]:checked {
+    background-color: rgb(255, 255, 255); 
+    border-color: rgb(247, 247, 247); 
+}
+
+.Friends{
+    height:fit-content;
+    padding: 20px 20px;
+    background-color:rgba(44, 44, 44, 0.301);
+    border: 1px rgba(255, 255, 255, 0.534) solid;
+    border-radius:20px; 
+    display:flex;
+    justify-content:center;
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.FriendRequests{
+    height:fit-content;
+    padding: 20px 20px;
+    background-color:rgba(44, 44, 44, 0.301);
+    border: 1px rgba(255, 255, 255, 0.534) solid;
+    border-radius:20px; 
+    display:flex;
+    justify-content:center;
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    box-sizing: border-box;
+}

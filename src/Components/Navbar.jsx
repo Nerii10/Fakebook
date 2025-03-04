@@ -15,7 +15,6 @@ export default function Navbar(){
     },[])
     
     useEffect(()=>{
-        console.log(Localuser)
     },[Localuser])
 
     function handleNavbarOpen(){

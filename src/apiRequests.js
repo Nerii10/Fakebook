@@ -1,5 +1,5 @@
-export const apiLink = 'https://fakebookbakcend.onrender.com'
-//http://localhost:8000
+export const apiLink = 'http://localhost:8000'
+//https://fakebookbakcend.onrender.com
 
 export const handleLocalUserDataDownload = async ({setLocaluser}) => {
     try {
@@ -18,12 +18,13 @@ export const handleLocalUserDataDownload = async ({setLocaluser}) => {
         }
 
         const UserData = await response.json(); 
-        setLocaluser(UserData.UserData);  
+        setLocaluser(UserData.user);  
     } catch (err) {
         console.error("Error fetching user data:", err);
         return "Error fetching user data:";  
     }
 };
+
 
 export const handleUserDataDownload = async ({setUser, id}) => {
     if(id){
