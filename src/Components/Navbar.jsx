@@ -3,7 +3,7 @@ import './Navbar.css'
 import { useState,useEffect } from "react"
 import { handleLocalUserDataDownload, handleLogout } from "../apiRequests"
 import {motion} from 'framer-motion'
-import { Book, BookA} from "lucide-react"
+import { Book, BookA, User2, Settings, HelpCircle, LogOutIcon, User} from "lucide-react"
 
 export default function Navbar(){
 
@@ -41,15 +41,26 @@ export default function Navbar(){
                     >{Localuser ? Localuser.name : "SignIn"}</button>
 
                     <motion.div className={"NavbarUser"}
-                    animate={NavbarOpen ? {height: "270px",  padding: "0px 10px"} : {height: "0px", padding:"0px 10px", border: "rgba(255, 255, 255, 0) 0px solid"}}
+                    animate={NavbarOpen ? {height: "150px",  padding: "0px 20px"} : {height: "0px", padding:"0px 20px", border: "rgba(255, 255, 255, 0) 0px solid"}}
                     transition={{ease:"circInOut"}}
-                    >
-                        <Link to={Localuser && `/users/${Localuser._id}`} style={{textDecoration:"none",textTransform:"capitalize", color:"white"}}>
-                        <h3 className="NavbarUserAction">Account</h3>
-                        </Link>
-                        <h3 className="NavbarUserAction">Settings</h3>
-                        <h3 className="NavbarUserAction">Help</h3>
-                        <h3 className="NavbarUserAction" onClick={handleLogout}>Logout</h3>
+                    >   
+                        
+                            <Link  className="NavbarAction" to={Localuser && `/users/${Localuser._id}`} style={{textDecoration:"none",textTransform:"capitalize", color:"white"}}>
+                                <User2></User2>
+                                <h3 className="NavbarUserAction">Account</h3>
+                            </Link>
+
+                        <div className="NavbarAction">
+                            <HelpCircle></HelpCircle>
+                            <h3 className="NavbarUserAction">Help</h3>
+                            
+                        </div>
+
+                        <div className="NavbarAction" onClick={handleLogout}>
+                            <LogOutIcon></LogOutIcon>
+                            <h3 className="NavbarUserAction">Logout</h3>
+                        </div>
+
                     </motion.div>
                     </>) : 
                     <>

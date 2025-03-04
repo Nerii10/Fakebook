@@ -24,15 +24,16 @@
     top:66px;
     right: -1%;
     height: 0px;
-    width: 85px;
+    width: 150px;
     display: flex;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    align-items: center;
     flex-direction: column;
-    background-color: #0c0c0c;
+    justify-content: center;
+    background-color: #000000;
     border: rgba(255, 255, 255, 0.4) 1px solid;
     overflow: hidden;
+    gap: 20px;
 }
 
 .NavbarButton{
@@ -49,9 +50,49 @@
 .NavbarUserAction{
     cursor: pointer;
     transition: 0.25s ease;
+    margin: 0;
+    position: relative;
+    width: fit-content;
+    z-index: 2;
 }
 
-.NavbarUserAction:hover{
-    scale: 1.3;
-    color:rgb(255, 167, 167);
+.NavbarAction{
+    z-index: 2;
+    position: relative;
+    width: fit-content;
+    transition: 0.25s ease;
+}
+
+.NavbarAction:hover{
+    padding: 0px 5px;
+}
+
+
+.NavbarAction::before{
+    position: absolute;
+    width: 0%;
+    content: '';
+    height: 100%;
+    transition: 0.25s ease;
+    background-color: red;
+    border-radius: 5px;
+    z-index: -1;
+    
+}
+
+.NavbarAction:hover::before{
+    position: absolute;
+    width: 100%;
+    content: '';
+    height: 100%;
+    background-color: red;
+}
+
+.NavbarAction{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
 }

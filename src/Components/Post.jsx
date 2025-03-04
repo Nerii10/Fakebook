@@ -122,7 +122,8 @@ export default function Post({ index, post, LocalUser }) {
                 <hr style={{ width: "100%" }} />
 
                 <div className="PostRating">
-                    <button
+                    <motion.button
+                        whileTap={{scale:0.9}}
                         className="PostRatingThumb"
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
@@ -131,9 +132,10 @@ export default function Post({ index, post, LocalUser }) {
                         disabled={!isUserLoggedIn} 
                     >
                         <ThumbsUp /> {updatedPost ? updatedPost.likes.length : ""}
-                    </button>
+                    </motion.button>
 
-                    <button
+                    <motion.button
+                        whileTap={{scale:0.9}}
                         className="PostRatingThumb"
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
@@ -142,7 +144,7 @@ export default function Post({ index, post, LocalUser }) {
                         disabled={!isUserLoggedIn} 
                     >
                         <ThumbsDown /> {updatedPost ? updatedPost.disslikes.length : ""}
-                    </button>
+                    </motion.button>
                 </div>
             </div>
         </div>

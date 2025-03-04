@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Post from '../Components/Post';
 import { apiLink } from '../apiRequests';
 import "./Styles/Userprofile.css"
-
+import { motion } from 'framer-motion';
 import { NotebookPen, Cake, Star, MailPlus } from 'lucide-react';
 
 export default function UserAccount() {
@@ -205,7 +205,9 @@ export default function UserAccount() {
                             <>  
                                 <div>
                                     {request.name + request.surename} 
-                                    <button onClick={()=>{handleAcceptFriend({sender: Localuser, receiver: request})}}>accept</button>
+                                    <motion.button 
+                                    whileTap={{scale:0.9}}
+                                    onClick={()=>{handleAcceptFriend({sender: Localuser, receiver: request})}}>accept</motion.button>
                                 </div>
                             </>
                         )})} 
@@ -354,7 +356,7 @@ export default function UserAccount() {
             
             </div>
 
-            <button className='AddFriendButton' onClick={() => { handleUserDataUpdate(); }}>Save</button>
+            <motion.button whileTap={{scale:0.9}} className='AddFriendButton' onClick={() => { handleUserDataUpdate(); }}>Save</motion.button>
 
             {User.description === "" &&
             User.email === "" &&
