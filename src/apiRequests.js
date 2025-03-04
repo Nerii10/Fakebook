@@ -1,5 +1,5 @@
-export const apiLink = 'http://localhost:8000'
-//https://fakebookbakcend.onrender.com
+export const apiLink = 'https://fakebookbakcend.onrender.com'
+//http://localhost:8000
 
 export const handleLocalUserDataDownload = async ({setLocaluser}) => {
     try {
