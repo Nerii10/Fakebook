@@ -48,10 +48,11 @@ export default function Home() {
     
 
     async function handlePostAddition() {
-        if(!Localuser) {
-            console.log("login first") 
+        if (!Localuser) {
+            console.log("Login first");
             return;
-        }        
+        }
+    
         try {
             const response = await fetch(`${apiLink}/api/post`, {
                 method: "POST",
@@ -60,17 +61,24 @@ export default function Home() {
                 },
                 body: JSON.stringify(Localpost),
             });
-
-            if (!response.ok) {
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log(data.newPost);
+               
+                setTimeout(()=>{ window.location.reload()},100)
+                console.log(Posts)
+            } else {
                 const errorData = await response.json();
                 throw new Error(`Error ${response.status}: ${errorData.message || "Unknown error"}`);
             }
-            
-            setTimeout((window.location.reload()),100)
+    
         } catch (err) {
             console.log(err);
         }
     }
+    
 
     return (
         <>

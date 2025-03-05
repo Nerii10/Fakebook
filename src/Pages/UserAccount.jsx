@@ -178,7 +178,9 @@ export default function UserAccount() {
 
             {/*UserMainData, Adding*/}
             <div style={{position:"relative",zIndex:-0, maxHeight:"400px"}}>
-                            <img src={User._id != "67c56609799c6ac2b965ebdd" ? '/Fakebook/Background3.jpg' : '/Fakebook/Background1.jpg'} className='UserImage'></img>
+                            <div className='ImageContainer'>
+                                <img src={User._id != "67c56609799c6ac2b965ebdd" ? '/Fakebook/Background3.jpg' : '/Fakebook/Background1.jpg'} className='UserImage'></img>
+                            </div>
                                 <div style={{display:'flex', justifyContent:'center', 
                                 alignItems:'center',position:'relative'}}
                                 >

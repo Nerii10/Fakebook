@@ -43,7 +43,7 @@ export default function Navbar(){
                     >{Localuser ? Localuser.name : "SignIn"}</motion.button>
 
                     <motion.div className={"NavbarUser"}
-                    animate={NavbarOpen ? {height: "150px",  padding: "0px 20px"} : {height: "0px", padding:"0px 20px", border: "rgba(255, 255, 255, 0) 0px solid"}}
+                    animate={NavbarOpen ? {height: "150px",  padding: "0px 20px", border: "rgba(255, 255, 255, 0.5) 1px solid"} : {height: "0px", padding:"0px 20px", border: "rgba(255, 255, 255, 0) 0px solid"}}
                     transition={{ease:"circInOut"}}
                     >   
                         
@@ -53,9 +53,11 @@ export default function Navbar(){
                             </Link>
 
                         <div className="NavbarAction">
-                            <HelpCircle></HelpCircle>
-                            <h3 className="NavbarUserAction">Help</h3>
                             
+                            <Link  className="NavbarAction" to={Localuser && `/help`} style={{textDecoration:"none",textTransform:"capitalize", color:"white"}}>
+                                <HelpCircle></HelpCircle>
+                                <h3 className="NavbarUserAction">Help</h3>
+                            </Link>
                         </div>
 
                         <div className="NavbarAction" onClick={handleLogout}>

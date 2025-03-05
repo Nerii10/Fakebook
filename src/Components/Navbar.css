@@ -26,11 +26,12 @@
     height: 0px;
     width: 150px;
     display: flex;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
     flex-direction: column;
+    border: 1px white solid;
     justify-content: center;
-    background-color: #000000;
+    background-color: #1a1a1a;
     border: rgba(255, 255, 255, 0.4) 1px none;
     overflow: hidden;
     gap: 20px;
@@ -73,7 +74,7 @@
     content: '';
     height: 100%;
     transition: 0.25s ease;
-    background-color: red;
+    background-color:rgb(76, 0, 255);
     border-radius: 5px;
     z-index: -1;
     
@@ -84,7 +85,7 @@
     width: 100%;
     content: '';
     height: 100%;
-    background-color: red;
+    background-color: rgb(76, 0, 255);
 }
 
 .NavbarAction{

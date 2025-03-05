@@ -4,6 +4,7 @@ import SignIn from "./Pages/SignIn";
 import TestPage from "./Pages/Test/testpage";
 import UserAccount from "./Pages/UserAccount";
 import Home from "./Pages/Home";
+import Help from "./Pages/Help";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/Users/:id" element={<UserAccount />} />
       <Route path="/About" element={<SignIn />} />
       <Route path="/test" element={<TestPage />} />
+      <Route path="/help" element={<Help />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
