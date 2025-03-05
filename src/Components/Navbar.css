@@ -31,7 +31,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: #000000;
-    border: rgba(255, 255, 255, 0.4) 1px solid;
+    border: rgba(255, 255, 255, 0.4) 1px none;
     overflow: hidden;
     gap: 20px;
 }
@@ -64,7 +64,6 @@
 }
 
 .NavbarAction:hover{
-    padding: 0px 5px;
 }
 
 

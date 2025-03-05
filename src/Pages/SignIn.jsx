@@ -3,8 +3,9 @@ import { handleLogout} from "../apiRequests";
 import Navbar from "../Components/Navbar";
 import { apiLink } from "../apiRequests";
 import "./Styles/SignIn.css"
-import { LockIcon,User2Icon } from "lucide-react";
+import { LockIcon,Scale,User2Icon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function NotFound() {
     
@@ -150,13 +151,15 @@ export default function NotFound() {
                                 className="InputCredentials"
                             />
                         </div>
-                        <button 
+                        <motion.button 
                             className="InputCredentialButton"
                             onClick={handleLogin}  
                             style={{fontSize:"16px"}}
+                            whileTap={{scale:0.9}}
+                            whileHover={{scale:1.1}}
                         >
                             Login
-                        </button>
+                        </motion.button >
                         <div className="NotLoggedIn">
                             {message && <p style={{margin:0}}>{message}</p>}
 
@@ -241,14 +244,15 @@ export default function NotFound() {
                     </div> 
                     <div style={{height:"10px"}}></div>
                     
-                    <button 
+                    <motion.button 
                         className="InputCredentialButton"
-                        onClick={()=>{state == "login" ? setState("register") : handleRegister()}}  
                         style={{fontSize:"16px"}}
-
+                        whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}}
+                        onClick={()=>{state == "login" ? setState("register") : handleRegister()}}  
                     >
                         Register
-                    </button>
+                    </motion.button >
 
                     {message && <p>{message}</p>}
 

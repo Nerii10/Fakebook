@@ -36,9 +36,11 @@ export default function Navbar(){
                     {Localuser ?
                     (
                     <>
-                    <button onClick={handleNavbarOpen}
+                     <motion.button
+                        whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}} onClick={handleNavbarOpen}
                     className="NavbarButton"
-                    >{Localuser ? Localuser.name : "SignIn"}</button>
+                    >{Localuser ? Localuser.name : "SignIn"}</motion.button>
 
                     <motion.div className={"NavbarUser"}
                     animate={NavbarOpen ? {height: "150px",  padding: "0px 20px"} : {height: "0px", padding:"0px 20px", border: "rgba(255, 255, 255, 0) 0px solid"}}
@@ -64,7 +66,14 @@ export default function Navbar(){
                     </motion.div>
                     </>) : 
                     <>
-                    <Link to={Localuser ?`/users/${Localuser._id}` : "/signIn"} style={{textDecoration:"none",textTransform:"capitalize"}}><h1>{Localuser ? Localuser.name : "SignIn"}</h1></Link>
+                    <Link to={!Localuser && "/signIn"} style={{textDecoration:"none",textTransform:"capitalize"}}><h1>{Localuser ? Localuser.name : <>
+                        <motion.button
+                        whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}}
+                        className="NavbarButton"
+                        >{Localuser ? Localuser.name : "SignIn"}</motion.button>
+                    
+                    </>}</h1></Link>
 
                     </>
                     }

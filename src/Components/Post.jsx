@@ -124,6 +124,7 @@ export default function Post({ index, post, LocalUser }) {
                 <div className="PostRating">
                     <motion.button
                         whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}}
                         className="PostRatingThumb"
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
@@ -136,6 +137,7 @@ export default function Post({ index, post, LocalUser }) {
 
                     <motion.button
                         whileTap={{scale:0.9}}
+                        whileHover={{scale:1.1}}
                         className="PostRatingThumb"
                         style={{
                             backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",

@@ -4,10 +4,10 @@ import { handleLocalUserDataDownload, handlePostDownload } from "../apiRequests"
 import './Styles/Home.css';
 import Navbar from "../Components/Navbar";
 import Post from "../Components/Post";
+import Loading from "../Components/Loading";
 import { motion } from "framer-motion";
 import { Scale } from "lucide-react";
 import { apiLink } from "../apiRequests";
-
 export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
@@ -75,6 +75,9 @@ export default function Home() {
     return (
         <>
             <Navbar />
+            {Posts.length > 0 ? 
+            (<>
+
             <div className="WebsiteContent">
                 <h1>Catch up on the latest!</h1>
 
@@ -111,6 +114,14 @@ export default function Home() {
             </div>
 
             <br /><br /><br /><br /><br />
+
+            </>
+            ) : (
+            <>
+                <Loading></Loading>
+            </>
+            )}
+            
         </>
     );
 }
