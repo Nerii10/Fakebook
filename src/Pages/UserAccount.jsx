@@ -61,10 +61,10 @@ export default function UserAccount() {
         
                 const data = await response.json();
 
-               
+
                 
             if (response.ok) {
-                
+             window.location.reload();
             } else {
                     console.log(data.message); 
             }
@@ -366,7 +366,16 @@ export default function UserAccount() {
                 
                 </div>
 
-                <motion.button whileTap={{scale:0.9}} className='AddFriendButton' onClick={() => { handleUserDataUpdate(), window.location.reload() }}>Save</motion.button>
+                <motion.button 
+                whileTap={{ scale: 0.9 }} 
+                className="AddFriendButton" 
+                onClick={() => {
+                    handleUserDataUpdate()
+                }}
+                >
+                Save
+                </motion.button>
+
 
                 {User.description === "" &&
                 User.email === "" &&
