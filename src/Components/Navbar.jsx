@@ -40,7 +40,14 @@ export default function Navbar(){
                         whileTap={{scale:0.9}}
                         whileHover={{scale:1.1}} onClick={handleNavbarOpen}
                     className="NavbarButton"
-                    >{Localuser ? Localuser.name : "SignIn"}</motion.button>
+                    >{Localuser ?
+                        <p className="UsernameNavbar">{Localuser.name}</p>
+                    
+                     : 
+                    <>
+                     <p className="UsernameNavbar">SignIn</p>
+                    </>
+                    }</motion.button>
 
                     <motion.div className={"NavbarUser"}
                     animate={NavbarOpen ? {height: "150px",  padding: "0px 20px", border: "rgba(255, 255, 255, 0.5) 1px solid"} : {height: "0px", padding:"0px 20px", border: "rgba(255, 255, 255, 0) 0px solid"}}
@@ -73,7 +80,7 @@ export default function Navbar(){
                         whileTap={{scale:0.9}}
                         whileHover={{scale:1.1}}
                         className="NavbarButton"
-                        >{Localuser ? Localuser.name : "SignIn"}</motion.button>
+                        >{Localuser ? Localuser.name : <p className="UsernameNavbar">SignIn</p>}</motion.button>
                     
                     </>}</h1></Link>
 

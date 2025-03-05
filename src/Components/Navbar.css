@@ -96,3 +96,8 @@
     gap: 20px;
     align-items: center;
 }
+
+.UsernameNavbar{
+    margin: 0;
+    color:white;
+}
