@@ -14,17 +14,16 @@
     max-width: 500px;
     gap: 20px;
     transition: 0.5s ease;
-    z-index: 2;
-
+   
 }
 
 .Background{
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     color: transparent;
     background-image: radial-gradient(140% 107% at 50% 10%, #000314 37.41%, #6633EE 69.27%, #FFFFFF 100%);
-
+    z-index: 0;
 }
 
 .LoginRegisterContent{
@@ -33,8 +32,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1;
-
 }
 
 .InputCredentialContainer{
@@ -104,6 +101,8 @@
     border: 1px black solid;
     padding: 10px;
     background-color: rgb(255, 255, 255); 
+    cursor: pointer;
+
 }
 
 .NotLoggedIn{

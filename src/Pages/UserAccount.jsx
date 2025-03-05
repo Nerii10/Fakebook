@@ -7,7 +7,7 @@ import Post from '../Components/Post';
 import { apiLink } from '../apiRequests';
 import "./Styles/Userprofile.css"
 import { motion } from 'framer-motion';
-import { NotebookPen, Cake, Star, MailPlus } from 'lucide-react';
+import { NotebookPen, Cake, Star, MailPlus, Trash } from 'lucide-react';
 import Loading from '../Components/Loading'
 
 export default function UserAccount() {
@@ -40,8 +40,10 @@ export default function UserAccount() {
     },[User])
 
     useEffect(()=>{
-        console.log(Interests)
-    }, [Interests])
+        setUser()
+    },[id])
+
+
     async function handleUserDataUpdate() {
         const UserNewData = {
             birthdate: Birthdate,
@@ -86,13 +88,33 @@ export default function UserAccount() {
                 });
             
                     const data = await response.json();
+
+                    if (!response.ok) {
+                        console.log(data.message); 
+                        
+                    } else {setTimeout((window.location.reload()),100)}
+            
+            } catch (error) {
+                    console.error("Wystąpił błąd:", error);
+            }
+    }
+
+    async function handleDeclineFriend({sender,receiver}){
+        try {
+                const response = await fetch(`${apiLink}/api/friends/decline/${User._id}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({sender, receiver}), 
+                });
+            
+                    const data = await response.json();
     
                     
-                if (response.ok) {
-                    console.log(data)
-                } else {
+                    if (!response.ok) {
                         console.log(data.message); 
-                }
+                    } else {setTimeout((window.location.reload()),100)}
             
             } catch (error) {
                     console.error("Wystąpił błąd:", error);
@@ -111,13 +133,33 @@ export default function UserAccount() {
             
                     const data = await response.json();
     
-                    setTimeout((window.location.reload()),100)
                     
-                if (response.ok) {
-                    console.log(data)
-                } else {
+                    
+                if (!response.ok) {
                         console.log(data.message); 
-                }
+                } else {setTimeout((window.location.reload()),100)}
+            
+            } catch (error) {
+                    console.error("Wystąpił błąd:", error);
+            }
+    }
+
+    async function handleRemoveFriend({sender,receiver}){
+        try {
+                const response = await fetch(`${apiLink}/api/friends/remove/${User._id}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({sender, receiver}), 
+                });
+            
+                    const data = await response.json();
+    
+                    
+                if (!response.ok) {
+                    console.log(data.message); 
+                } else {setTimeout((window.location.reload()),100)}
             
             } catch (error) {
                     console.error("Wystąpił błąd:", error);
@@ -131,12 +173,12 @@ export default function UserAccount() {
         {User ? (
         <>
             
-        <div className='WebsiteContent'>
+        <div className='WebsiteContent' style={{gap:"50px"}}>
 
 
             {/*UserMainData, Adding*/}
             <div style={{position:"relative",zIndex:-0, maxHeight:"400px"}}>
-                            <img src='/Fakebook/test.jpg' className='UserImage'></img>
+                            <img src={User._id != "67c56609799c6ac2b965ebdd" ? '/Fakebook/Background.jpg' : '/Fakebook/Background4.png'} className='UserImage'></img>
                                 <div style={{display:'flex', justifyContent:'center', 
                                 alignItems:'center',position:'relative'}}
                                 >
@@ -197,7 +239,6 @@ export default function UserAccount() {
 
             
 
-            <br></br>
 
 
             {/*Friend Requests*/}
@@ -206,42 +247,65 @@ export default function UserAccount() {
 
                 {User && Localuser && User._id === Localuser._id &&
                 <>
-                <div className='FriendRequests'>
-                    <h2>FriendRequests</h2>
-                        
-                    <div>{User.friendRequests && User.friendRequests.map((request,index)=>{
+               
+                        {User.friendRequests && User.friendRequests.map((request,index)=>{
                             return(
-                                <>  
-                                    <div>
-                                        {request.name + request.surename} 
-                                        <motion.button 
-                                        whileTap={{scale:0.9}}
-                                        whileHover={{scale:1.1}}
-                                        onClick={()=>{handleAcceptFriend({sender: Localuser, receiver: request})}}>accept</motion.button>
+                                <>   
+                                <div className='FriendsContainer'>
+                                    <h2>Friend requests</h2>
+                                        
+                                    <div className='Friends'>
+                                        <div className='FriendRequest'>
+                                                <p style={{width:"50%"}}>{request.name + request.surename} </p>
+                                                
+                                                <div className='FriendRequestAction'>
+                                                <motion.button 
+                                                whileTap={{scale:0.9}}
+                                                whileHover={{scale:1.1}}
+                                                className='AcceptFriendButton'
+                                                onClick={()=>{handleAcceptFriend({sender: Localuser, receiver: request})}}>accept</motion.button>
+                                            
+                                                <motion.button 
+                                                whileTap={{scale:0.9}}
+                                                whileHover={{scale:1.1}}
+                                                className='DeclineFriendButton'
+                                                onClick={()=>{handleDeclineFriend({sender: Localuser, receiver: request})}}
+                                                >decline</motion.button>
+                                                </div>
+                                        </div>
                                     </div>
+                                </div>
                                 </>
                             )})} 
-                    </div>
-                </div></>}
-            <br></br>
+                </>}
 
 
             {/*Friends*/}
-            <div className='Friends'>
-                <h2>Friends</h2>
+            <div className='FriendsContainer'>
+                <h2 >Friends</h2>
 
-                <div>{User && User.friends && User.friends.length > 0 ? User.friends.map((friend,index)=>{
+                <div className='Friends'>
+                    {User && User.friends && User.friends.length > 0 ? User.friends.map((friend,index)=>{
                         return(
                                 <>  
-                                    <div>
+                                    <div className='Friend'>
                                         <Link onClick={()=>{setUser(null)}} to={`/users/${friend._id}`}>{friend.name + " " + friend.surename} </Link>
+                                        {User && Localuser && Localuser._id === User._id &&
+                                        <motion.button 
+                                        whileTap={{scale:0.9}}
+                                        whileHover={{scale:1.1}}
+                                        className='RemoveFriendButton'
+                                        onClick={()=>{handleRemoveFriend({sender: Localuser, receiver: friend})}}
+                                        >
+                                        <Trash></Trash>
+                                        </motion.button>
+                                        }
                                     </div>
                                 </>
                         )}): "No Friends"} 
                 </div>
             </div>
 
-            <br></br><br></br>
 
 
             {/*UserData*/}
@@ -255,26 +319,38 @@ export default function UserAccount() {
 
                 {/* Main data */}
                 <div className="UserDataInput">
-                    <NotebookPen className='DataIcon'/>
-                    <textarea
-                    
-                    placeholder="change description"
-                    className="UserDataInput"
-                    value={Description}
-                    onChange={(event) => {
-                        setDescription(event.target.value);
-                    }}
-                    />
+                    <div style={{width:"15%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <NotebookPen className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                       <textarea
+                        
+                        placeholder="change description"
+                        className="UserDataInput"
+                        value={Description}
+                        onChange={(event) => {
+                            setDescription(event.target.value);
+                        }}
+                        />
+                    </div> 
                 </div>
 
                 <div className="UserDataInput">
-                    <MailPlus className='DataIcon'/>
-                    <p>{User.email === "" ? "-" : User.email}</p>
+                    <div style={{width:"15%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <MailPlus className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <p>{User.email === "" ? "-" : User.email}</p>
+                    </div>
+                   
                 </div>
 
                 <div className="UserDataInput">
-                    <Cake className='DataIcon'/>
-                    <input
+                    <div style={{width:"15%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <Cake className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                       <input
                         type="date"
                         placeholder="change description"
                         className="UserDataInput"
@@ -283,11 +359,16 @@ export default function UserAccount() {
                             setBirthdate(event.target.value);
                         }}
                         />
+                    </div>
+                    
                 </div>
 
                 <div className="UserDataInput">
-                    <Star className='DataIcon'/>
-                    <div className='Interests'>
+                    <div style={{width:"15%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <Star className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <div className='Interests'>
                     {Interests && 
                     <>
                         <label>
@@ -302,7 +383,7 @@ export default function UserAccount() {
                                 setInterests(newInterests); 
                                 }}
                             />
-                            Music
+                             <p>Music</p>
                         </label>
                         <label>
                             <input
@@ -316,7 +397,7 @@ export default function UserAccount() {
                                 setInterests(newInterests); 
                                 }}
                             />
-                            Swimming
+                             <p>Swimming</p>
                         </label>
                         <label>
                             <input
@@ -330,7 +411,7 @@ export default function UserAccount() {
                                 setInterests(newInterests); 
                                 }}
                             />
-                            Cycling
+                             <p>Cycling</p>
                         </label>
                         <label>
                             <input
@@ -344,7 +425,8 @@ export default function UserAccount() {
                                 setInterests(newInterests); 
                                 }}
                             />
-                            Programming
+                             <p>Programming</p>
+                            
                         </label>
                         <label>
                             <input
@@ -358,11 +440,13 @@ export default function UserAccount() {
                                 setInterests(newInterests); 
                                 }}
                             />
-                            Playing Games
+                            <p>Playing Games</p>
                         </label>
                         
                     </>
                     }</div>
+                    </div>
+                   
                 
                 </div>
 
@@ -419,8 +503,6 @@ export default function UserAccount() {
             </div>
 
                     {/*Feed*/}
-
-                    <h1 style={{textTransform:"capitalize"}}></h1>
 
                     <div className="Feed">
 

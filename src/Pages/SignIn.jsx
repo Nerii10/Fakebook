@@ -115,7 +115,7 @@ export default function NotFound() {
         <Navbar></Navbar>
         <div className="Background">e</div>
             <div className="WebsiteContent">
-            <h1>{state == "login" ? "Login" : "SignIn"}</h1>
+            <h1 style={{zIndex:1}}>{state == "login" ? "Login" : "SignIn"}</h1>
             
                 <div className="LoginRegisterContent">
                 {state == "login" ?
@@ -163,7 +163,7 @@ export default function NotFound() {
                         <div className="NotLoggedIn">
                             {message && <p style={{margin:0}}>{message}</p>}
 
-                            <p onClick={()=>{setState("register")}} style={{margin:0}}>No account? Create one!</p>
+                            <p onClick={()=>{setState("register")}} style={{margin:0, cursor:"pointer"}}>No account? Create one!</p>
                         </div>
                     </div>
                 </> :
@@ -261,6 +261,16 @@ export default function NotFound() {
                 </>}
 
                 {/*token && <p>Logged in! Token: {token}</p>*/}
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br><br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                
                 </div>
             </div>
         </>
