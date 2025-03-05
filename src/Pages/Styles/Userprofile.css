@@ -50,6 +50,7 @@
    border-bottom-left-radius: var(--borderRadius);
    border-bottom-right-radius: var(--borderRadius);
    border: 1px rgba(255, 255, 255, 0.4) solid;
+   height: 55vw;
 }
 
 .UserData{

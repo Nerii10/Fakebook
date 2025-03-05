@@ -26,7 +26,7 @@ export default function UserAccount() {
     const [Description, setDescription] = useState(User?.description)
     const [Surename, setSurename] = useState("")
     const [Interests, setInterests] = useState([])
-
+    const [Background, setBackground] = useState(User?.backgroundimage)
     useEffect(()=>{
         handlePostDownload({setPosts})
         handleLocalUserDataDownload({setLocaluser})
@@ -179,7 +179,7 @@ export default function UserAccount() {
             {/*UserMainData, Adding*/}
             <div style={{position:"relative",zIndex:-0, maxHeight:"400px"}}>
                             <div className='ImageContainer'>
-                                <img src={User._id != "67c56609799c6ac2b965ebdd" ? '/Fakebook/Background3.jpg' : '/Fakebook/Background1.jpg'} className='UserImage'></img>
+                                <img src={User._id != "67c56609799c6ac2b965ebdd" ? `${User.backgroundimage}` : `${User.backgroundimage}`} className='UserImage'></img>
                             </div>
                                 <div style={{display:'flex', justifyContent:'center', 
                                 alignItems:'center',position:'relative'}}

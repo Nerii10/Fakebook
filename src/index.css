@@ -64,6 +64,7 @@ body,html{
 .FeedInputButton{
   border: 1px rgb(255, 255, 255) solid;
   color:white;
+  cursor: pointer;
   font-size: 15px;
   margin: 0;
   padding: 10px 10px;
