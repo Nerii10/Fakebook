@@ -274,6 +274,7 @@ export function PostManip({ Settings, setSettings, updatedPost, setUpdatedPost }
                 onClick={() => { setSettings(prev => (prev === 1 ? 0 : 1)) }}
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.1 }}
+                style={{color:"white"}}
             >
                 ...
             </motion.button>
