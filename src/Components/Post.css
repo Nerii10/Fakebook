@@ -64,9 +64,17 @@
 .PostRating{
     display: flex;
     width: 100%;
-    gap: 30px;
+    gap: 20px;
     align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    color:rgb(126, 126, 126);
 }
+
+.PostRating span{
+    white-space: nowrap;
+}
+
 
 .PostRatingThumb{
     --colorNoInteraction: transparent;
@@ -85,4 +93,134 @@
 
 .PostRatingThumb:disabled{
     color: rgb(99, 99, 99);
+}
+
+.Comments{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+    gap:20px;
+    max-height: 350px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: -30px;
+}
+.Comment{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:10px;
+    padding: 10px 20px;
+    background-color:rgb(25, 25, 25);
+    width: 92%;
+    border-bottom:1px rgba(255, 255, 255, 0.535) solid;
+    border-radius: 10px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.CommentData{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap:20px;
+}
+
+.CommentContent{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap:20px;
+}
+
+.CommentManip{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+
+.CommentManip button{
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgba(61, 61, 61, 0.774);
+    backdrop-filter: blur(2px);
+    border: rgba(255, 255, 255, 0.527) 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CommentsPostMenu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(25, 25, 25);
+    padding: 10px;
+    border-radius: 10px;
+    top: 0; 
+    z-index: 1000; 
+
+}
+
+.CommentsPostMenu input[type="text"]{
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px white solid;
+}
+
+.CommentsPostMenu button{
+    width: 30%;
+    border-radius: 20px;
+    border: 1px white solid;
+    background-color: rgb(93, 0, 255);
+    padding: 10px 0px;
+}
+
+.CommentContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 30px;
+}
+.CommentsBorder{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+    gap:20px;
+    border-left: rgba(251, 251, 251, 0.489) 2px;
+    border-left-style:dashed;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.PostCreatorName{
+    margin: 0;
+    color: rgb(211, 197, 255);
+    text-transform: capitalize;
+    position: relative;
+    z-index: 1;
+}
+
+.PostCreatorName::before{
+    position: absolute;
+    content: '';
+    background-color: rgb(109, 31, 255);
+    width: 100%;
+    height: 3px;
+    border-radius: 20px;
+    z-index: -1;
+    margin-top: 23px;
 }

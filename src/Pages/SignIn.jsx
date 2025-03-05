@@ -3,7 +3,7 @@ import { handleLogout} from "../apiRequests";
 import Navbar from "../Components/Navbar";
 import { apiLink } from "../apiRequests";
 import "./Styles/SignIn.css"
-import { LockIcon,Scale,User2Icon } from "lucide-react";
+import { LockIcon,Scale,User2Icon,Mail,UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -203,7 +203,7 @@ export default function NotFound() {
                     <div style={{height:"10px"}}></div>
                     <div className="InputCredentialContainer">
                         <h2  className={name.length != 0 ? "InputCredentialLoginIn": "InputCredentialLogin"}>
-                            <LockIcon></LockIcon>
+                            <UserRound></UserRound>
                             Name
                         </h2>
                         <input 
@@ -217,7 +217,7 @@ export default function NotFound() {
                     <div style={{height:"10px"}}></div>
                     <div className="InputCredentialContainer">
                         <h2  className={surename.length != 0 ? "InputCredentialLoginIn": "InputCredentialLogin"}>
-                            <LockIcon></LockIcon>
+                            <UserRound></UserRound>
                             Surename
                         </h2>
                         <input 
@@ -231,7 +231,7 @@ export default function NotFound() {
                     <div style={{height:"10px"}}></div>
                     <div className="InputCredentialContainer">
                         <h2  className={email.length != 0 ? "InputCredentialLoginIn": "InputCredentialLogin"}>
-                            <LockIcon></LockIcon>
+                            <Mail></Mail>
                             Email
                         </h2>
                         <input 
