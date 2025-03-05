@@ -226,7 +226,7 @@ export default function Post({ index, post, LocalUser }) {
 
                                             {LocalUser && comment.userId === LocalUser._id &&
                                         <div className="CommentManip">
-                                        <button onClick={()=>{handlePostCommentDelete({post: updatedPost, comment: comment, LocalUser, setPost: setUpdatedPost})}}><Trash></Trash></button>
+                                            <button onClick={()=>{handlePostCommentDelete({post: updatedPost, comment: comment, LocalUser, setPost: setUpdatedPost})}}><Trash></Trash></button>
                                         </div>
                                             }
                                            
@@ -287,7 +287,7 @@ export function PostManip({ Settings, setSettings, updatedPost, setUpdatedPost }
             >
                 <motion.div
                     onClick={() => {handlePostDelete({updatedPost, setUpdatedPost})}}
-                    style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}
+                    style={{ display: 'flex', justifyContent: "center", alignItems: "center",color:"white"}}
                 >
                     <Trash />
                 </motion.div>

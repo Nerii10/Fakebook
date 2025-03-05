@@ -256,7 +256,7 @@ export default function UserAccount() {
                                         
                                     <div className='Friends'>
                                         <div className='FriendRequest'>
-                                                <p style={{width:"50%"}}>{request.name + request.surename} </p>
+                                                <p style={{width:"50%"}} className="PostCreatorName">{request.name + request.surename}</p>
                                                 
                                                 <div className='FriendRequestAction'>
                                                 <motion.button 
@@ -289,7 +289,9 @@ export default function UserAccount() {
                         return(
                                 <>  
                                     <div className='Friend'>
-                                        <Link onClick={()=>{setUser(null)}} to={`/users/${friend._id}`}>{friend.name + " " + friend.surename} </Link>
+                                   
+
+                                        <Link onClick={()=>{setUser(null)}} to={`/users/${friend._id}`} style={{textDecoration:"none"}}> <p className="PostCreatorName">{friend.name + " " + friend.surename}</p></Link>
                                         {User && Localuser && Localuser._id === User._id &&
                                         <motion.button 
                                         whileTap={{scale:0.9}}
