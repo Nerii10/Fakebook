@@ -8,11 +8,13 @@ import Loading from "../Components/Loading";
 import { motion } from "framer-motion";
 import { Scale } from "lucide-react";
 import { apiLink } from "../apiRequests";
+
+
 export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
     const [Posts, setPosts] = useState([]);
-
+    
     useEffect(() => {
         handleLocalUserDataDownload({ setLocaluser });
     }, []);
@@ -32,6 +34,7 @@ export default function Home() {
     const hours = today.getHours(); 
     const minutes = today.getMinutes(); 
     const seconds = today.getSeconds(); 
+    const welcomeMessage = 'Catch up on the latest!'
     
     const time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     
@@ -87,7 +90,36 @@ export default function Home() {
             (<>
 
             <div className="WebsiteContent">
-                <h1>Catch up on the latest!</h1>
+            <h1>
+            {welcomeMessage?.split(' ').map((word, index) => {
+             return (
+                <>
+                <motion.span
+                key={index} 
+                style={{ margin: 0, display: 'inline-block' }}
+                initial={{ opacity: 0, scale: 1, y: -50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                    type: "spring", 
+                    stiffness: 300,
+                    damping: 25,   
+                    mass: 0.1,      
+                    velocity: 20,
+                    restDelta: 0.5, 
+                    restSpeed: 0.2, 
+                    delay: index * 0.2, 
+                    duration: 1.5, 
+                    ease: "circInOut", 
+                }}
+            >
+    {word}
+</motion.span>
+
+
+                <span> </span></>
+                );})}
+                </h1>
+
 
                 <div className="FeedInput">
                     <motion.input
