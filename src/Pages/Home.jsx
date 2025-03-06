@@ -189,11 +189,12 @@ export default function Home() {
                                     type="file" 
                                     accept="image/jpeg, image/png, image/webp, image/gif" 
                                     disabled={!Localuser || Pendingpost}
-                                    style={!Localuser ? {backgroundColor:"transparent"} : {backgroundColor:"white"}}
                                     className="file-input" 
                                     onChange={(event) => { setFile(event.target.files[0]); }} 
                                 />
-                                <span className="file-attachment"><Image></Image></span>
+                                <span className="file-attachment"
+                                style={!Localuser ? {backgroundColor:"transparent"} : {backgroundColor:"white"}}
+                                ><Image></Image></span>
                                 
                                 </label>
                             </div>
