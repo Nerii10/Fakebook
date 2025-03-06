@@ -71,16 +71,14 @@ export default function UserAccount() {
         }
     }
     
-
     async function handleUserDataUpdate() {
 
         const formData = new FormData();
         formData.append('image', Newprofilepic);  
         formData.append('birthdate', Birthdate);  
         formData.append('description', Description);  
-        formData.append('interests', Interests);  
+        formData.append('interests', JSON.stringify(Interests));
         formData.append('currentprofilepicture', Localuser.profilepicture)
-
         try {
             const response = await fetch(`${apiLink}/api/users/me`, {
                     method: "PATCH",
@@ -244,6 +242,7 @@ export default function UserAccount() {
                                                     <h1 className='UserName'>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
                                             </>
                                             ): <>
+                                            <img src={User.profilepicture} className='profilepicture' style={{width:"50px"}}></img>
                                             <h1 className='UserName'>{User ? `${User.name} ${User.surename}` : "Loading"}</h1></>}
                                                                             
                                                                             </div>
