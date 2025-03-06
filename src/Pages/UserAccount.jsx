@@ -224,6 +224,7 @@ export default function UserAccount() {
                                                         <p>Change picture</p>
                                                     </label>
                                                     <input 
+                                                        accept="image/jpeg, image/png, image/webp, image/gif" 
                                                         type="file" 
                                                         id="file-upload"
                                                         onChange={(event) => setNewprofilepic(event.target.files[0])} 

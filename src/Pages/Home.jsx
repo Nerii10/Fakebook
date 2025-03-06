@@ -187,6 +187,7 @@ export default function Home() {
                                 <label className="file-label">
                                 <input 
                                     type="file" 
+                                    accept="image/jpeg, image/png, image/webp, image/gif" 
                                     disabled={!Localuser || Pendingpost}
                                     style={!Localuser ? {backgroundColor:"transparent"} : {backgroundColor:"white"}}
                                     className="file-input" 
