@@ -188,6 +188,7 @@ export default function Home() {
                                 <input 
                                     type="file" 
                                     disabled={!Localuser || Pendingpost}
+                                    style={!Localuser ? {backgroundColor:"transparent"} : {backgroundColor:"white"}}
                                     className="file-input" 
                                     onChange={(event) => { setFile(event.target.files[0]); }} 
                                 />
