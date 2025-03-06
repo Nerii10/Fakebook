@@ -1,4 +1,4 @@
-const Production = false;
+const Production = true;
 export const apiLink = Production 
   ? 'https://fakebookbakcend.onrender.com' 
   : 'http://localhost:8000';
