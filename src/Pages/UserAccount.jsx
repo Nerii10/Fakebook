@@ -531,7 +531,7 @@ export default function UserAccount() {
                         <NotebookPen className='DataIcon'/>
                     </div>
                     <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
-                        <p style={{ whiteSpace: "pre-wrap" }}>{User?.description === "" ? "-" : User?.description}</p>
+                        <p style={{ whiteSpace: "pre-wrap"}}>{User?.description === "" ? "-" : User?.description }</p>
                     </div> 
                 </div>
                 
@@ -560,7 +560,13 @@ export default function UserAccount() {
                         <Star className='DataIcon'/>
                     </div>
                     <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
-                    <p>{User?.interests === "" ? "-" : User?.interests}</p>
+                    <p style={{width:"85%",wordBreak:'break-all'}}>
+                        {User?.interests.map((interest,index)=>{
+                            return(
+                                <span style={{width:"fit-content"}}>{interest}, </span>
+                            )
+                        })}
+                    </p>
                     </div> 
                 </div>
 
