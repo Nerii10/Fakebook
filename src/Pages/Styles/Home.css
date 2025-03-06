@@ -1,0 +1,36 @@
+.file-label {
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    right: 10px;
+    top:0;
+    transition: 0.15s ease;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-input {
+    display: none;  
+}
+
+.file-attachment {
+    position: absolute;
+    z-index: 2;
+    color:rgb(140, 140, 140);
+    width: 30px; 
+    height: 30px;  
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    
+}
+
+.FeedInput:focus-within .file-label {
+    right: 10px;
+    opacity: 0.3;
+    scale: 0.7;
+}

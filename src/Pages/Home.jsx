@@ -8,7 +8,7 @@ import Loading from "../Components/Loading";
 import { motion } from "framer-motion";
 import { Scale } from "lucide-react";
 import { apiLink } from "../apiRequests";
-
+import { Image } from "lucide-react";
 
 export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
@@ -68,12 +68,17 @@ export default function Home() {
             console.log("Login first");
             return;
         }
+
+        if (!Localpost.image && !Localpost.content) {
+            return;
+        }
         
+
         const formData = new FormData();
     
-        formData.append('content', Localpost.content);
-        formData.append('userid', Localpost.userid);
-        formData.append('username', Localpost.username);
+        formData.append('content', (Localpost.content == undefined ? "-" : Localpost.content));
+        formData.append('userid', Localuser._id);
+        formData.append('username', Localuser.name);
         formData.append('date', Localpost.date);
     
         if (Localpost.image) {
@@ -148,25 +153,37 @@ export default function Home() {
                             <span> </span></>
                             );})}
                             </h1>
-                                <input type="file" onChange={(event)=>{setFile(event.target.files[0])}}></input>
 
+                            <div className="FeedInput" style={{maxWidth:"100%"}}>
+                            
 
-
-                            <div className="FeedInput">
+                                <div className="FeedInput">
                                 <motion.input
                                     whileFocus={{scale:0.9}}
                                     className="FeedInputText"
-                                    disabled={Pendingpost}
+                                    disabled={!Localuser || Pendingpost}
                                     type="text"
                                     placeholder="What's on your mind?"
                                     value={Localpost ? Localpost.content : ""}
                                     onChange={handleLocalpostContent}
                                 />
+
+                                <label className="file-label">
+                                <input 
+                                    type="file" 
+                                    disabled={!Localuser || Pendingpost}
+                                    className="file-input" 
+                                    onChange={(event) => { setFile(event.target.files[0]); }} 
+                                />
+                                <span className="file-attachment"><Image></Image></span>
+                                
+                                </label>
+                            </div>
                                 <motion.input
                                     whileTap={{scale:0.9}}
                                     whileHover={{scale:1.1}}
                                     className="FeedInputButton"
-                                    disabled={Pendingpost}
+                                    disabled={!Localuser || Pendingpost}
                                     type="button"
                                     value={"Post"}
                                     onClick={handlePostAddition}
@@ -196,7 +213,7 @@ export default function Home() {
                         )}
                 </>
                 : 
-                <Loading></Loading>
+                <Loading LoadingText={"Uploading file.... please wait"}></Loading>
                 }
         </>
     );

@@ -2,16 +2,24 @@ import { useEffect, useState } from 'react'
 import './Loading.css'
 import { LoaderCircleIcon, LoaderCircle } from 'lucide-react'
 
-export default function Loading(){
+export default function Loading({LoadingText}){
 
     const [message, setMessage] = useState("")
 
-    useEffect(()=>{
+    if(!LoadingText){
+        useEffect(()=>{
         setTimeout(() => { 
             setMessage("Please wait 10-20 seconds... The server was put to sleep due to inactivity.");
         }, 3500);
-        
-    },[])
+        },[])
+    } else {
+        useEffect(()=>{
+            setTimeout(() => { 
+                setMessage(LoadingText);
+            }, 0);
+            },[])
+    }
+    
     return(
         <>
             <div className="LoadingScreen">

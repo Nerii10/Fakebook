@@ -122,7 +122,6 @@ export default function Post({ index, post, LocalUser }) {
         }
     };
 
-    // Funkcja do obsługi disslike posta
     const handleDislike = () => {
         if (isUserLoggedIn) {
             handlePostDisslike({ post: updatedPost, LocalUser, setPost: setUpdatedPost });
@@ -145,8 +144,8 @@ export default function Post({ index, post, LocalUser }) {
                             )
                         )}
                     </div>
-                    <div className="PostContent">
-                        <span>{updatedPost.content}</span>
+                    <div className="PostContent" >
+                        <span style={updatedPost?.content === "-" ? { display: "none" } : {}}>{updatedPost.content}</span>
                     </div>
                     {updatedPost.imageurl && 
                      <div className="PostImageContainter">
@@ -292,14 +291,14 @@ export function PostManip({ Settings, setSettings, updatedPost, setUpdatedPost }
                 className="PostSettings"
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.1 }}
-                animate={Settings ? { padding: "20px 5px", borderWidth: "1px", opacity: 1 } : { height: 0, padding: "0px 5px", borderWidth: "0px", opacity: 1 }}
+                animate={Settings ? { padding: "20px 5px", borderWidth: "1px", opacity: 1 } : { height: 0, padding: "0px 5px", borderWidth: "0px", opacity: 1 ,}}
                 transition={{ ease: "circInOut", duration: 0.25 }}
             >
                 <motion.div
                     onClick={() => {handlePostDelete({updatedPost, setUpdatedPost})}}
-                    style={{ display: 'flex', justifyContent: "center", alignItems: "center",color:"white"}}
+                    style={{ display: 'flex', justifyContent: "center", alignItems: "center",color:"white", cursor:"pointer"}}
                 >
-                    <Trash />
+                    <Trash/>
                 </motion.div>
             </motion.div>
         </div>
