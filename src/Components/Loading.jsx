@@ -9,7 +9,7 @@ export default function Loading({LoadingText}){
     if(!LoadingText){
         useEffect(()=>{
         setTimeout(() => { 
-            setMessage("Please wait 10-20 seconds... The server was put to sleep due to inactivity.");
+            setMessage("Please wait 10-20 seconds... The server has been put to sleep due to inactivity. In the meantime, please keep refreshing every 5 seconds.");
         }, 3500);
         },[])
     } else {

@@ -247,7 +247,7 @@ export default function Post({ index, post, LocalUser, userprofile }) {
                                                     {comment.comment}
                                                 </div>
 
-                                                {LocalUser && comment.userId === LocalUser._id &&
+                                                {LocalUser && (LocalUser._id == updatedPost.userid || comment.userId === LocalUser._id) &&
                                             <div className="CommentManip">
                                                 <button onClick={()=>{handlePostCommentDelete({post: updatedPost, comment: comment, LocalUser, setPost: setUpdatedPost})}}><Trash></Trash></button>
                                             </div>
