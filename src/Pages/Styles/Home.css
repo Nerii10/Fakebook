@@ -26,11 +26,25 @@
     justify-content: center;
     background-color: white;
     align-items: center;
-    
 }
 
 .FeedInput:focus-within .file-label {
     right: 10px;
-    opacity: 0.3;
+    opacity: 1;
     scale: 0.7;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.FeedInput:disabled .file-label {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: not-allowed; 
+}
+
+.FeedInput:disabled .file-attachment {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: not-allowed; 
+}
+
+.FeedInput:focus-within .file-attachment {
+    background-color: rgba(0, 0, 0, 0);
 }

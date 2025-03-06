@@ -30,6 +30,7 @@
 
 .UserName{
     margin:0;
+    word-break: break-all;
     font-size:20px;
 }
 
@@ -40,12 +41,13 @@
     z-index:0;
     border-bottom-left-radius: var(--borderRadius);
     border-bottom-right-radius: var(--borderRadius);
-    border: 1px rgba(255, 255, 255, 0.4) solid;
+    border: none;
 }
 
 .ImageContainer{
    max-height:400px;
    --borderRadius: 25px;
+   background-color: rgba(68, 68, 68, 0);
    overflow:hidden;
    border-bottom-left-radius: var(--borderRadius);
    border-bottom-right-radius: var(--borderRadius);
@@ -318,3 +320,36 @@
     border-radius: 15px;
     cursor: pointer;
 }
+
+.changeprofilepic {
+    display: none;
+}
+
+.change-profile-pic-label {
+    cursor: pointer;
+    font-size: 12px;
+    color: #ffffffdf;
+    padding: 10px;
+    background-color: #0000005d;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    opacity: 1;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.change-profile-pic-label i {
+    font-size: 24px;
+}
+
+.change-profile-pic-label:hover {
+    background-color: #000000d2;
+    color: #ffffff;
+    transform: scale(1.2);
+}
+

@@ -7,7 +7,7 @@ import { apiLink } from "../apiRequests"
 
 
 
-export default function Post({ index, post, LocalUser }) {
+export default function Post({ index, post, LocalUser, userprofile }) {
 
         async function handlePostLike({ post, LocalUser, setPost }) {
             try {
@@ -133,9 +133,12 @@ export default function Post({ index, post, LocalUser }) {
                   <div className="Post" key={index}>
                 <div className="InnerPost">
                     <div className="PostData">
-                        <Link to={`/users/${post.userid}`} style={{textDecoration:"none"}}><p className="PostCreatorName">{post.username}</p></Link>
+                        <div style={{display:"flex",justifyContent:'center',alignItems:'center', gap:"10px"}}>
+                            <img src={userprofile.profilepicture} className="profilepicture"></img>
+                            <Link to={`/users/${post.userid}`} style={{textDecoration:"none"}}><p className="PostCreatorName">{post.username}</p></Link>
+                        </div>
                         {isUserLoggedIn && LocalUser._id === "67c56609799c6ac2b965ebdd" ? (
-                            <>
+                            <>  
                                 <PostManip Settings={Settings} setSettings={setSettings} updatedPost={updatedPost} setUpdatedPost={{setUpdatedPost}}/>
                             </>
                         ) : (
@@ -144,8 +147,21 @@ export default function Post({ index, post, LocalUser }) {
                             )
                         )}
                     </div>
+                    <hr style={{ width: "100%", opacity:0.1 }} />
                     <div className="PostContent" >
-                        <span style={updatedPost?.content === "-" ? { display: "none" } : {}}>{updatedPost.content}</span>
+                        {updatedPost.content != "-" && 
+                        (updatedPost.content.split(" ").map((word,index)=>{
+                            if(word.includes(".com")){
+                                return(
+                                    <a href={word}>{word.slice(12)}</a>
+                                )
+                            }else{
+                                return(
+                                    <span>{word} </span>
+                                    )
+                            }
+                        }))
+                        }
                     </div>
                     {updatedPost.imageurl && 
                      <div className="PostImageContainter">
@@ -158,9 +174,8 @@ export default function Post({ index, post, LocalUser }) {
                     <span className="PostDate">{updatedPost.date}</span>
 
                     
+                    <hr style={{ width: "100%", opacity:0.1 }} />
 
-
-                    <hr style={{ width: "100%", opacity:0.2 }} />
                     
                     <div className="PostRating">
                         <motion.button
@@ -199,7 +214,7 @@ export default function Post({ index, post, LocalUser }) {
                     </div>
                     
 
-                    
+                            
                 
                     
                     <motion.div initial={{height:"0px", overflow:"hidden"}} 
@@ -223,7 +238,7 @@ export default function Post({ index, post, LocalUser }) {
                                             <div className="Comment">
                                                 <div className="CommentData">
                                                     <Link to={`users/${comment.userId}`} style={{textDecoration:"none"}}>
-                                                    <p className="PostCreatorName">{comment.username} {comment.usersurename}</p>
+                                                    <p className="PostCreatorName" style={{}}>{comment.username} {comment.usersurename}</p>
                                                     </Link>
                                                 </div>
 

@@ -13,7 +13,7 @@ import Loading from '../Components/Loading'
 export default function UserAccount() {
 
     const { id } = useParams();
-
+    const [Friends, setFriends] = useState(null)
     const [Localuser,setLocaluser] = useState(null)
     const [DynamicLocaluser,setDynamicLocaluser] = useState(null)
     const [User,setUser] = useState(null)
@@ -27,10 +27,14 @@ export default function UserAccount() {
     const [Surename, setSurename] = useState("")
     const [Interests, setInterests] = useState([])
     const [Background, setBackground] = useState(User?.backgroundimage)
+    const [Newprofilepic, setNewprofilepic] = useState()
+
+    
     useEffect(()=>{
         handlePostDownload({setPosts})
         handleLocalUserDataDownload({setLocaluser})
         handleUserDataDownload({setUser,id})
+        handleFriendsProfilepictures()
     },[id])
 
     useEffect(()=>{
@@ -43,22 +47,47 @@ export default function UserAccount() {
         setUser()
     },[id])
 
+    useEffect(()=>{
+        handleFriendsProfilepictures()
+    },[])
+
+    async function handleFriendsProfilepictures() {
+        try {
+            const response = await fetch(`${apiLink}/api/friends/profilepictures`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json(); 
+                setFriends(data.users)
+            } else {
+                console.error('Błąd odpowiedzi:', response.status);
+            }
+        } catch (err) {
+            console.log('Wystąpił błąd:', err);
+        }
+    }
+    
 
     async function handleUserDataUpdate() {
-        const UserNewData = {
-            birthdate: Birthdate,
-            description: Description,
-            interests: Interests
-        }
+
+        const formData = new FormData();
+        formData.append('image', Newprofilepic);  
+        formData.append('birthdate', Birthdate);  
+        formData.append('description', Description);  
+        formData.append('interests', Interests);  
+        formData.append('currentprofilepicture', Localuser.profilepicture)
 
         try {
             const response = await fetch(`${apiLink}/api/users/me`, {
                     method: "PATCH",
                     headers: {
-                        "Content-Type": "application/json",
                         "Authorization": `${localStorage.getItem("token")}`
                     },
-                    body: JSON.stringify(UserNewData), 
+                    body: formData, 
             });
         
                 const data = await response.json();
@@ -66,7 +95,7 @@ export default function UserAccount() {
 
                 
             if (response.ok) {
-             window.location.reload();
+                setTimeout(() => { window.location.reload() }, 200);
             } else {
                     console.log(data.message); 
             }
@@ -128,11 +157,10 @@ export default function UserAccount() {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({user: User,Localuser}), 
+                        body: JSON.stringify({user: User,   Localuser}), 
                 });
             
                     const data = await response.json();
-    
                     
                     
                 if (!response.ok) {
@@ -179,18 +207,30 @@ export default function UserAccount() {
             {/*UserMainData, Adding*/}
             <div style={{position:"relative",zIndex:-0, maxHeight:"400px"}}>
                             <div className='ImageContainer'>
+                                
                                 <img src={User._id != "67c56609799c6ac2b965ebdd" ? `${User.backgroundimage}` : `${User.backgroundimage}`} className='UserImage'></img>
                             </div>
                                 <div style={{display:'flex', justifyContent:'center', 
                                 alignItems:'center',position:'relative'}}
                                 >
                                     <div className='UserProfileHeader'>
-                                        <div style={{width:"65%",display:'flex',justifyContent:'start', alignItems:'center'}}>
+                                        <div style={{width:"65%",display:'flex',justifyContent:'start', alignItems:'center', gap:"10px"}}>
                                             
                                             {User && Localuser ?Localuser._id === User._id ? 
                                             
                                             (
                                                 <>
+                                                   <label htmlFor="file-upload" className="change-profile-pic-label">
+                                                        <p>Change picture</p>
+                                                    </label>
+                                                    <input 
+                                                        type="file" 
+                                                        id="file-upload"
+                                                        onChange={(event) => setNewprofilepic(event.target.files[0])} 
+                                                        className="changeprofilepic"
+                                                    />
+
+                                                    <img src={User.profilepicture} className='profilepicture' style={{width:"50px"}}></img>
                                                     <h1 className='UserName'>{Localuser ? `${Localuser.name} ${Localuser.surename}` : "Loading"}</h1>
                                                 </>
                                             ) 
@@ -199,9 +239,12 @@ export default function UserAccount() {
                                             
                                             (
                                             <>
+                                                    <img src={User.profilepicture} className='profilepicture' style={{width:"50px"}}></img>
                                                     <h1 className='UserName'>{User ? `${User.name} ${User.surename}` : "Loading"}</h1>
                                             </>
-                                            ): <><h1 className='UserName'>{User ? `${User.name} ${User.surename}` : "Loading"}</h1></>}
+                                            ): <>
+                                            <h1 className='UserName'>{User ? `${User.name} ${User.surename}` : "Loading"}</h1></>}
+                                                                            
                                                                             </div>
                                         <div style={{width:"35%", display:'flex',justifyContent:'center', alignItems:'center'}}>
 
@@ -245,7 +288,7 @@ export default function UserAccount() {
 
             {/*Friend Requests*/}
                     
-
+           
 
                 {User && Localuser && User._id === Localuser._id &&
                 <>
@@ -258,8 +301,9 @@ export default function UserAccount() {
                                         
                                     <div className='Friends'>
                                         <div className='FriendRequest'>
-                                                <p style={{width:"50%"}} className="PostCreatorName">{request.name + request.surename}</p>
-                                                
+                                                <div style={{width:"50%"}}>
+                                                    <Link to={`/users/${request._id}`} style={{width:"fit-content", textDecoration:"none"}} className="PostCreatorName">{request.name + request.surename}</Link>
+                                                </div>
                                                 <div className='FriendRequestAction'>
                                                 <motion.button 
                                                 whileTap={{scale:0.9}}
@@ -288,12 +332,20 @@ export default function UserAccount() {
 
                 <div className='Friends'>
                     {User && User.friends && User.friends.length > 0 ? User.friends.map((friend,index)=>{
-                        return(
+                       
+                       return(
                                 <>  
                                     <div className='Friend'>
-                                   
+                                        <div style={{display:'flex', justifyContent:'start',alignItems:"center", gap:"10px"}}>
 
+                                        {Friends && (() => {
+                                        const friendData = Friends.find(friendF => friendF._id.toString() === friend._id.toString());
+                                        return friendData ? <img className="profilepicture" src={friendData.profilepicture} alt="Profile" /> : null;
+                                        })()}
+
+                                        
                                         <Link onClick={()=>{setUser(null)}} to={`/users/${friend._id}`} style={{textDecoration:"none"}}> <p className="PostCreatorName">{friend.name + " " + friend.surename}</p></Link>
+                                        </div>
                                         {User && Localuser && Localuser._id === User._id &&
                                         <motion.button 
                                         whileTap={{scale:0.9}}
@@ -525,11 +577,11 @@ export default function UserAccount() {
 
                     <div className="Feed">
 
-                        {Localuser ? Posts && Posts.toReversed().map((post,index)=>{
+                        {Friends && Localuser ? Posts && Posts.toReversed().map((post,index)=>{
                             if(post.userid === id){
                             return(
                                 <>
-                                    <Post index={index} post={post} LocalUser={Localuser}></Post>
+                                    <Post index={index} post={post} LocalUser={Localuser}  userprofile={Friends.find(fr => fr._id === post.userid)} ></Post>
                                 </>
                             )}}): "Login to discover more"} 
 

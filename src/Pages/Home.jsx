@@ -16,19 +16,15 @@ export default function Home() {
     const [Posts, setPosts] = useState([]);
     const [File, setFile] = useState('')
     const [Pendingpost, setPendingpost] = useState(0)
+    const [Friends, setFriends] = useState(null)
+    
 
-
-    useEffect(() => {
-        handleLocalUserDataDownload({ setLocaluser });
-    }, []);
-
+   
     useEffect(() => {
         handlePostDownload({ setPosts });
+        handleFriendsProfilepictures()
+        handleLocalUserDataDownload({ setLocaluser });
     }, []);
-
-    useEffect(() => {
-        console.log(Localpost);
-    }, [Localpost]);
 
     const today = new Date();
     const day = today.getDate();
@@ -108,7 +104,27 @@ export default function Home() {
             console.log(err);
         }
     }
+
+    async function handleFriendsProfilepictures() {
+        try {
+            const response = await fetch(`${apiLink}/api/friends/profilepictures`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
     
+            if (response.ok) {
+                const data = await response.json(); 
+                setFriends(data.users)
+                console.log(data.users)
+            } else {
+                console.error('Błąd odpowiedzi:', response.status);
+            }
+        } catch (err) {
+            console.log('Wystąpił błąd:', err);
+        }
+    }
 
     
     return (
@@ -157,7 +173,7 @@ export default function Home() {
                             <div className="FeedInput" style={{maxWidth:"100%"}}>
                             
 
-                                <div className="FeedInput">
+                            <div className="FeedInput">
                                 <motion.input
                                     whileFocus={{scale:0.9}}
                                     className="FeedInputText"
@@ -193,13 +209,19 @@ export default function Home() {
                             <br />
 
                             <div className="Feed">
-                                {Posts.length > 0 ? (
+                            {Friends && Posts.length > 0 ? (
                                     Posts.toReversed().map((post, index) => (
-                                        <Post key={index} index={index} post={post} LocalUser={Localuser}></Post>
+                                        <Post 
+                                            key={index} 
+                                            index={index} 
+                                            post={post} 
+                                            LocalUser={Localuser} 
+                                            userprofile={Friends.find(fr => fr._id === post.userid)} 
+                                        />
                                     ))
-                                ) : (
-                                    "Loading..."
-                                )}
+                                    ) : (
+                                        "Loading..."
+                                    )}
                             </div>
                         </div>
 
