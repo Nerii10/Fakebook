@@ -220,6 +220,7 @@ export default function Home() {
                                             post={post} 
                                             LocalUser={Localuser} 
                                             userprofile={Friends.find(fr => fr._id === post.userid)} 
+                                            friends={Friends}
                                         />
                                     ))
                                     ) : (

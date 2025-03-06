@@ -7,7 +7,7 @@ import { apiLink } from "../apiRequests"
 
 
 
-export default function Post({ index, post, LocalUser, userprofile }) {
+export default function Post({ index, post, LocalUser, userprofile,  friends }) {
 
         async function handlePostLike({ post, LocalUser, setPost }) {
             try {
@@ -237,7 +237,7 @@ export default function Post({ index, post, LocalUser, userprofile }) {
                                         <>
                                             <div className="Comment">
                                                 <div className="CommentData">
-                                                    <img className="profilepicture" src={comment.userprofilepicture}></img>
+                                                    <img className="profilepicture" src={friends?.find(friend => friend._id === comment.userId)?.profilepicture} ></img>
                                                     <Link to={`users/${comment.userId}`} style={{textDecoration:"none"}}>
                                                     <p className="PostCreatorName" style={{}}>{comment.username} {comment.usersurename}</p>
                                                     </Link>

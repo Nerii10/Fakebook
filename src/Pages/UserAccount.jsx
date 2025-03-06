@@ -587,7 +587,13 @@ export default function UserAccount() {
                             if(post.userid === id){
                             return(
                                 <>
-                                    <Post index={index} post={post} LocalUser={Localuser}  userprofile={Friends.find(fr => fr._id === post.userid)} ></Post>
+                                    <Post
+                                     index={index} 
+                                     post={post} 
+                                     LocalUser={Localuser}  
+                                     userprofile={Friends.find(fr => fr._id === post.userid)} 
+                                     friends={Friends}
+                                     ></Post>
                                 </>
                             )}}): "Login to discover more"} 
 
