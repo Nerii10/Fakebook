@@ -475,26 +475,41 @@ export default function UserAccount() {
             <>
                 {/* Main data */}
                 <div className="UserDataInput">
-                <NotebookPen />
-                <p style={{ whiteSpace: "pre-wrap" }}>
-                {User?.description === "" ? "-" : User?.description}
-                </p>
+                    <div style={{width:"10%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <NotebookPen className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <p style={{ whiteSpace: "pre-wrap" }}>{User?.description === "" ? "-" : User?.description}</p>
+                    </div> 
+                </div>
+                
 
+
+                <div className="UserDataInput">
+                    <div style={{width:"10%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <MailPlus className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                    <p>{User?.email === "" ? "-" : User?.email}</p>
+                    </div> 
                 </div>
 
                 <div className="UserDataInput">
-                <MailPlus />
-                <p>{User?.email === "" ? "-" : User?.email}</p>
+                    <div style={{width:"10%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <Cake className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                    <p>{User?.birthdate === "" ? "-" : User?.birthdate}</p>
+                    </div> 
                 </div>
 
                 <div className="UserDataInput">
-                <Cake />
-                <p>{User?.birthdate === "" ? "-" : User?.birthdate}</p>
-                </div>
-
-                <div className="UserDataInput">
-                <Star />
-                <p>{User?.interests === "" ? "-" : User?.interests}</p>
+                <div style={{width:"10%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                        <Star className='DataIcon'/>
+                    </div>
+                    <div style={{width:"85%",display:'flex',justifyContent:"start",alignItems:'center'}}>
+                    <p>{User?.interests === "" ? "-" : User?.interests}</p>
+                    </div> 
                 </div>
 
                 {User?.description === "" &&

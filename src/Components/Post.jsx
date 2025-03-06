@@ -52,8 +52,6 @@ export default function Post({ index, post, LocalUser }) {
             }
         }
 
-       
-
         async function handlePostCommentAdd({ post, LocalUser, setPost }){
          
             if (Comment !== "" && LocalUser) {
@@ -106,12 +104,16 @@ export default function Post({ index, post, LocalUser }) {
 
         }
 
+      
+        
+        
+        
+
 
     const [Settings, setSettings] = useState(0);
     const [updatedPost, setUpdatedPost] = useState(post);
     const [Comment, setComment] = useState("");
     const [HiddenComments, setHiddenComments] = useState(1);
-
     const isUserLoggedIn = LocalUser != null;
 
     const handleLike = () => {
@@ -128,119 +130,126 @@ export default function Post({ index, post, LocalUser }) {
     };
 
     return (
-        <div className="Post" key={index}>
-            <div className="InnerPost">
-                <div className="PostData">
-                    <Link to={`/users/${post.userid}`} style={{textDecoration:"none"}}><p className="PostCreatorName">{post.username}</p></Link>
-                    {isUserLoggedIn && LocalUser._id === "67c56609799c6ac2b965ebdd" ? (
-                        <>
-                            <PostManip Settings={Settings} setSettings={setSettings} updatedPost={updatedPost} setUpdatedPost={{setUpdatedPost}}/>
-                        </>
-                    ) : (
-                        isUserLoggedIn && LocalUser._id === post.userid && (
-                            <PostManip Settings={Settings} setSettings={setSettings} updatedPost={updatedPost} setUpdatedPost={{setUpdatedPost}}/>
-                        )
-                    )}
-                </div>
-
-                <div className="PostContent">
-                    <span>{updatedPost.content}</span>
-                </div>
-                
-                <br />
-                <span className="PostDate">{updatedPost.date}</span>
-
-                
-
-
-                <hr style={{ width: "100%", opacity:0.2 }} />
-                
-                <div className="PostRating">
-                    <motion.button
-                        whileTap={{scale:0.9}}
-                        whileHover={{scale:1.1}}
-                        className="PostRatingThumb"
-                        style={{
-                            backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
-                        }}
-                        onClick={()=>{handleLike(), (isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) && handleDislike())}}  
-                        disabled={!isUserLoggedIn} 
-                    >
-                        <ThumbsUp /> 
-                        {updatedPost && updatedPost.likes.length}
-                    </motion.button>
-                    
-                    <motion.button
-                        whileTap={{scale:0.9}}
-                        whileHover={{scale:1.1}}
-                        className="PostRatingThumb"
-                        style={{
-                            backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
-                        }}
-                        onClick={()=>{handleDislike(), (isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) && handleLike())}} 
-                        disabled={!isUserLoggedIn} 
-                    >
-                        <ThumbsDown />
-                        {updatedPost && updatedPost.disslikes.length}
-                    </motion.button>
-                    <br></br>
-
-                    {updatedPost && (updatedPost.comments.length >= 1) ?
-                    <span onClick={()=>{setHiddenComments(prev=>(prev == 1 ? 0 : 1))}}>Comments {updatedPost.comments.length}</span>
-                    :
-                    <span onClick={()=>{setHiddenComments(prev=>(prev == 1 ? 0 : 1))}}>No comments</span>}
-                </div>
-                
-
-                
-             
-                
-                <motion.div initial={{height:"0px", overflow:"hidden"}} 
-                     animate={!HiddenComments ? {height:'fit-content',overflowY:"auto",} : {height:"0px", overflowY:"hidden",padding:0}}
-                     transition={{duration:0.5 , ease:"circOut"}}
-                     className="CommentContainer">
-
-                    <div className="CommentsPostMenu">
-                        <input type="text" placeholder="Add a comment" value={Comment} onChange={(event)=>{setComment(event.target.value)}}></input>
-                        <button onClick={()=>{handlePostCommentAdd({post: updatedPost, LocalUser, setPost: setUpdatedPost})}}>Post</button> 
+        <>
+                  <div className="Post" key={index}>
+                <div className="InnerPost">
+                    <div className="PostData">
+                        <Link to={`/users/${post.userid}`} style={{textDecoration:"none"}}><p className="PostCreatorName">{post.username}</p></Link>
+                        {isUserLoggedIn && LocalUser._id === "67c56609799c6ac2b965ebdd" ? (
+                            <>
+                                <PostManip Settings={Settings} setSettings={setSettings} updatedPost={updatedPost} setUpdatedPost={{setUpdatedPost}}/>
+                            </>
+                        ) : (
+                            isUserLoggedIn && LocalUser._id === post.userid && (
+                                <PostManip Settings={Settings} setSettings={setSettings} updatedPost={updatedPost} setUpdatedPost={{setUpdatedPost}}/>
+                            )
+                        )}
                     </div>
+                    <div className="PostContent">
+                        <span>{updatedPost.content}</span>
+                    </div>
+                    {updatedPost.imageurl && 
+                     <div className="PostImageContainter">
+                        <img src={updatedPost.imageurl} className="PostImage"></img>
+                     </div>
+                    }
 
-                    <motion.div
-                     className="Comments" 
-                     style={updatedPost.comments.length == 0 && {padding:0, display:"none"}}
-                     >
-                        <div  className="CommentsBorder" >
-                            {updatedPost && updatedPost.comments.toReversed().map((comment,index)=>{
-                                return(
-                                    <>
-                                        <div className="Comment">
-                                            <div className="CommentData">
-                                                <Link to={`users/${comment.userId}`} style={{textDecoration:"none"}}>
-                                                <p className="PostCreatorName">{comment.username} {comment.usersurename}</p>
-                                                </Link>
+                   
+                    <br />
+                    <span className="PostDate">{updatedPost.date}</span>
+
+                    
+
+
+                    <hr style={{ width: "100%", opacity:0.2 }} />
+                    
+                    <div className="PostRating">
+                        <motion.button
+                            whileTap={{scale:0.9}}
+                            whileHover={{scale:1.1}}
+                            className="PostRatingThumb"
+                            style={{
+                                backgroundColor: isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
+                            }}
+                            onClick={()=>{handleLike(), (isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) && handleDislike())}}  
+                            disabled={!isUserLoggedIn} 
+                        >
+                            <ThumbsUp /> 
+                            {updatedPost && updatedPost.likes.length}
+                        </motion.button>
+                        
+                        <motion.button
+                            whileTap={{scale:0.9}}
+                            whileHover={{scale:1.1}}
+                            className="PostRatingThumb"
+                            style={{
+                                backgroundColor: isUserLoggedIn && updatedPost.disslikes.includes(LocalUser._id) ? "var(--colorInteraction)" : "var(--colorNoInteraction)",
+                            }}
+                            onClick={()=>{handleDislike(), (isUserLoggedIn && updatedPost.likes.includes(LocalUser._id) && handleLike())}} 
+                            disabled={!isUserLoggedIn} 
+                        >
+                            <ThumbsDown />
+                            {updatedPost && updatedPost.disslikes.length}
+                        </motion.button>
+                        <br></br>
+
+                        {updatedPost && (updatedPost.comments.length >= 1) ?
+                        <span onClick={()=>{setHiddenComments(prev=>(prev == 1 ? 0 : 1))}}>Comments {updatedPost.comments.length}</span>
+                        :
+                        <span onClick={()=>{setHiddenComments(prev=>(prev == 1 ? 0 : 1))}}>No comments</span>}
+                    </div>
+                    
+
+                    
+                
+                    
+                    <motion.div initial={{height:"0px", overflow:"hidden"}} 
+                        animate={!HiddenComments ? {height:'fit-content',overflowY:"auto",} : {height:"0px", overflowY:"hidden",padding:0}}
+                        transition={{duration:0.5 , ease:"circOut"}}
+                        className="CommentContainer">
+
+                        <div className="CommentsPostMenu">
+                            <input type="text" placeholder="Add a comment" value={Comment} onChange={(event)=>{setComment(event.target.value)}}></input>
+                            <button onClick={()=>{handlePostCommentAdd({post: updatedPost, LocalUser, setPost: setUpdatedPost})}}>Post</button> 
+                        </div>
+
+                        <motion.div
+                        className="Comments" 
+                        style={updatedPost.comments.length == 0 && {padding:0, display:"none"}}
+                        >
+                            <div  className="CommentsBorder" >
+                                {updatedPost && updatedPost.comments.toReversed().map((comment,index)=>{
+                                    return(
+                                        <>
+                                            <div className="Comment">
+                                                <div className="CommentData">
+                                                    <Link to={`users/${comment.userId}`} style={{textDecoration:"none"}}>
+                                                    <p className="PostCreatorName">{comment.username} {comment.usersurename}</p>
+                                                    </Link>
+                                                </div>
+
+                                                <div className="CommentContent">
+                                                    {comment.comment}
+                                                </div>
+
+                                                {LocalUser && comment.userId === LocalUser._id &&
+                                            <div className="CommentManip">
+                                                <button onClick={()=>{handlePostCommentDelete({post: updatedPost, comment: comment, LocalUser, setPost: setUpdatedPost})}}><Trash></Trash></button>
                                             </div>
-
-                                            <div className="CommentContent">
-                                                {comment.comment}
+                                                }
+                                            
                                             </div>
+                                            
+                                        </>
+                                    )
+                                })}
+                                </div>
+                        </motion.div>
+                    </motion.div>  
 
-                                            {LocalUser && comment.userId === LocalUser._id &&
-                                        <div className="CommentManip">
-                                            <button onClick={()=>{handlePostCommentDelete({post: updatedPost, comment: comment, LocalUser, setPost: setUpdatedPost})}}><Trash></Trash></button>
-                                        </div>
-                                            }
-                                           
-                                        </div>
-                                        
-                                    </>
-                                )
-                            })}
-                            </div>
-                    </motion.div>
-                </motion.div>  
-
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

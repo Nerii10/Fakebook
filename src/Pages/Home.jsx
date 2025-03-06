@@ -14,7 +14,10 @@ export default function Home() {
     const [Localuser, setLocaluser] = useState(null);
     const [Localpost, setLocalpost] = useState(null);
     const [Posts, setPosts] = useState([]);
-    
+    const [File, setFile] = useState('')
+    const [Pendingpost, setPendingpost] = useState(0)
+
+
     useEffect(() => {
         handleLocalUserDataDownload({ setLocaluser });
     }, []);
@@ -46,32 +49,51 @@ export default function Home() {
             "userid": Localuser?._id,
             "username": Localuser?.name,
             "date": fullDate,
+            "image": File,
         });
     }
-    
+
+    useEffect(()=>{
+        setLocalpost({
+            "content": Localpost?.content,
+            "userid": Localuser?._id,
+            "username": Localuser?.name,
+            "date": fullDate,
+            "image": File,
+        });
+    },[File])
 
     async function handlePostAddition() {
         if (!Localuser) {
             console.log("Login first");
             return;
         }
+        
+        const formData = new FormData();
     
+        formData.append('content', Localpost.content);
+        formData.append('userid', Localpost.userid);
+        formData.append('username', Localpost.username);
+        formData.append('date', Localpost.date);
+    
+        if (Localpost.image) {
+            formData.append('image', Localpost.image);  
+        }
+        
+        setLocalpost()
+        setPendingpost(1)
+
         try {
             const response = await fetch(`${apiLink}/api/post`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(Localpost),
+                body: formData,  
             });
     
             const data = await response.json();
     
             if (response.ok) {
                 console.log(data.newPost);
-               
-                setTimeout(()=>{ window.location.reload()},100)
-                console.log(Posts)
+                setTimeout(() => { window.location.reload() }, 200);
             } else {
                 const errorData = await response.json();
                 throw new Error(`Error ${response.status}: ${errorData.message || "Unknown error"}`);
@@ -83,85 +105,99 @@ export default function Home() {
     }
     
 
+    
     return (
         <>
             <Navbar />
-            {Posts.length > 0 ? 
-            (<>
-
-            <div className="WebsiteContent">
-            <h1>
-            {welcomeMessage?.split(' ').map((word, index) => {
-             return (
+                {Pendingpost == 0 ? 
                 <>
-                <motion.span
-                key={index} 
-                style={{ margin: 0, display: 'inline-block' }}
-                initial={{ opacity: 0, scale: 1, y: -50 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{
-                    type: "spring", 
-                    stiffness: 300,
-                    damping: 25,   
-                    mass: 0.1,      
-                    velocity: 20,
-                    restDelta: 0.5, 
-                    restSpeed: 0.2, 
-                    delay: index * 0.2, 
-                    duration: 1.5, 
-                    ease: "circInOut", 
-                }}
-            >
-    {word}
-</motion.span>
+                        {Posts.length > 0 
+                        ? 
+                        (<>
+
+                        <div className="WebsiteContent">
+                            
+                        <h1>
+                        {welcomeMessage?.split(' ').map((word, index) => {
+                        return (
+                            <>
+                            <motion.span
+                            key={index} 
+                            style={{ margin: 0, display: 'inline-block' }}
+                            initial={{ opacity: 0, scale: 1, y: -50 }}
+                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{
+                                type: "spring", 
+                                stiffness: 300,
+                                damping: 25,   
+                                mass: 0.1,      
+                                velocity: 20,
+                                restDelta: 0.5, 
+                                restSpeed: 0.2, 
+                                delay: index * 0.2, 
+                                duration: 1.5, 
+                                ease: "circInOut", 
+                            }}
+                        >
+                            
+                {word}
+            </motion.span>
 
 
-                <span> </span></>
-                );})}
-                </h1>
+
+                            <span> </span></>
+                            );})}
+                            </h1>
+                                <input type="file" onChange={(event)=>{setFile(event.target.files[0])}}></input>
 
 
-                <div className="FeedInput">
-                    <motion.input
-                        whileFocus={{scale:0.9}}
-                        className="FeedInputText"
-                        type="text"
-                        placeholder="What's on your mind?"
-                        value={Localpost ? Localpost.content : ""}
-                        onChange={handleLocalpostContent}
-                    />
-                    <motion.input
-                        whileTap={{scale:0.9}}
-                        whileHover={{scale:1.1}}
-                        className="FeedInputButton"
-                        type="button"
-                        value={"Post"}
-                        onClick={handlePostAddition}
-                    />
-                </div>
 
-                <br />
+                            <div className="FeedInput">
+                                <motion.input
+                                    whileFocus={{scale:0.9}}
+                                    className="FeedInputText"
+                                    disabled={Pendingpost}
+                                    type="text"
+                                    placeholder="What's on your mind?"
+                                    value={Localpost ? Localpost.content : ""}
+                                    onChange={handleLocalpostContent}
+                                />
+                                <motion.input
+                                    whileTap={{scale:0.9}}
+                                    whileHover={{scale:1.1}}
+                                    className="FeedInputButton"
+                                    disabled={Pendingpost}
+                                    type="button"
+                                    value={"Post"}
+                                    onClick={handlePostAddition}
+                                />
+                            </div>
 
-                <div className="Feed">
-                    {Posts.length > 0 ? (
-                        Posts.toReversed().map((post, index) => (
-                            <Post key={index} index={index} post={post} LocalUser={Localuser}></Post>
-                        ))
-                    ) : (
-                        "Loading..."
-                    )}
-                </div>
-            </div>
+                            <br />
 
-            <br /><br /><br /><br /><br />
+                            <div className="Feed">
+                                {Posts.length > 0 ? (
+                                    Posts.toReversed().map((post, index) => (
+                                        <Post key={index} index={index} post={post} LocalUser={Localuser}></Post>
+                                    ))
+                                ) : (
+                                    "Loading..."
+                                )}
+                            </div>
+                        </div>
 
-            </>
-            ) : (
-            <>
+                        <br /><br /><br /><br /><br />
+
+                        </>
+                        ) : (
+                        <>
+                            <Loading></Loading>
+                        </>
+                        )}
+                </>
+                : 
                 <Loading></Loading>
-            </>
-            )}
-            
+                }
         </>
     );
 }
