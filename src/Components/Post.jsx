@@ -237,6 +237,7 @@ export default function Post({ index, post, LocalUser, userprofile }) {
                                         <>
                                             <div className="Comment">
                                                 <div className="CommentData">
+                                                    <img className="profilepicture" src={comment.userprofilepicture}></img>
                                                     <Link to={`users/${comment.userId}`} style={{textDecoration:"none"}}>
                                                     <p className="PostCreatorName" style={{}}>{comment.username} {comment.usersurename}</p>
                                                     </Link>
