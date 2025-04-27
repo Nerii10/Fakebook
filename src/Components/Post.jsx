@@ -219,7 +219,7 @@ export default function Post({ index, post, LocalUser, userprofile,  friends }) 
                     
                     <motion.div initial={{height:"0px", overflow:"hidden"}} 
                         animate={!HiddenComments ? {height:'fit-content',overflowY:"auto",} : {height:"0px", overflowY:"hidden",padding:0}}
-                        transition={{duration:0.5 , ease:"circOut"}}
+                        transition={{duration:0.5 , ease:"easeInOut"}}
                         className="CommentContainer">
 
                         <div className="CommentsPostMenu">
